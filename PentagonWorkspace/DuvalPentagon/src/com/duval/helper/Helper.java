@@ -1,4 +1,4 @@
-package com.duval.helper;
+package com.duval.utils;
 
 import java.awt.Color;
 import java.awt.Container;
@@ -12,7 +12,9 @@ import javax.swing.JPanel;
 
 import com.duval.components.D1Fault;
 import com.duval.components.D2Fault;
+import com.duval.components.Fault;
 import com.duval.components.PDFault;
+import com.duval.components.SFault;
 import com.duval.components.T1Fault;
 import com.duval.components.T2Fault;
 import com.duval.components.T3Fault;
@@ -26,37 +28,46 @@ public class Helper extends JPanel {
 
 		int xorigin = 400;
 		int yorigin = 200;
+		int scale = 3;
 
 		// Creation of the Extreme Points
-		p.addPoint(xorigin + 0, yorigin - 100);
-		p.addPoint(xorigin - 95, yorigin - 31);
-		p.addPoint(xorigin - 59, yorigin + 81);
-		p.addPoint(xorigin + 59, yorigin + 81);
-		p.addPoint(xorigin + 95, yorigin - 31);
+		p.addPoint(xorigin + 0*scale, yorigin - 100*scale);
+		p.addPoint(xorigin - 95*scale, yorigin - 31*scale);
+		p.addPoint(xorigin - 59*scale, yorigin + 81*scale);
+		p.addPoint(xorigin + 59*scale, yorigin + 81*scale);
+		p.addPoint(xorigin + 95*scale, yorigin - 31*scale);
 
 		g.drawPolygon(p);
+		g.drawLine(xorigin, yorigin, xorigin + 0*scale, yorigin - 100*scale);
+		g.drawLine(xorigin, yorigin, xorigin - 95*scale, yorigin - 31*scale);
+		g.drawLine(xorigin, yorigin, xorigin - 59*scale, yorigin + 81*scale);
+		g.drawLine(xorigin, yorigin, xorigin + 59*scale, yorigin + 81*scale);
+		g.drawLine(xorigin, yorigin, xorigin + 95*scale, yorigin - 31*scale);
 
 		// Creation of the Boundaries
 
 		
 		g.setColor(Color.CYAN);
-		PDFault pd = new PDFault(xorigin, yorigin);
-		g.fillPolygon(pd.getPDx(),pd.getPDy(),pd.len());
+		Fault pd = new PDFault(xorigin, yorigin, scale);
+		g.fillPolygon(pd.getX(),pd.getY(),pd.len());
 		g.setColor(Color.PINK);
-		D1Fault d1 = new D1Fault(xorigin, yorigin);
-		g.fillPolygon(d1.getD1x(xorigin),d1.getD1y(yorigin), d1.len());
+		Fault d1 = new D1Fault(xorigin, yorigin, scale);
+		g.fillPolygon(d1.getX(),d1.getY(), d1.len());
 		g.setColor(Color.GREEN);
-		D2Fault d2 = new D2Fault(xorigin, yorigin);
-		g.fillPolygon(d2.getD2x(xorigin), d2.getD2y(yorigin), d2.len());
+		Fault d2 = new D2Fault(xorigin, yorigin, scale);
+		g.fillPolygon(d2.getX(), d2.getY(), d2.len());
 		g.setColor(Color.ORANGE);
-		T3Fault t3 = new T3Fault(xorigin, yorigin);
-		g.fillPolygon(t3.getT3x(xorigin), t3.getT3y(yorigin), t3.len());
+		Fault t3 = new T3Fault(xorigin, yorigin, scale);
+		g.fillPolygon(t3.getX(), t3.getY(), t3.len());
 		g.setColor(Color.PINK);
-		T2Fault t2 = new T2Fault(xorigin, yorigin);
-		g.fillPolygon(t2.getT2x(xorigin), t2.getT2y(yorigin), t2.len());
+		Fault t2 = new T2Fault(xorigin, yorigin, scale);
+		g.fillPolygon(t2.getX(), t2.getY(), t2.len());
 		g.setColor(Color.YELLOW);
-		T1Fault t1 = new T1Fault(xorigin, yorigin);
-		g.fillPolygon(t1.getT1x(xorigin), t1.getT1y(yorigin), t1.len());
+		Fault t1 = new T1Fault(xorigin, yorigin, scale);
+		g.fillPolygon(t1.getX(), t1.getY(), t1.len());
+		g.setColor(Color.RED);
+		Fault s = new SFault(xorigin, yorigin, scale);
+		g.fillPolygon(s.getX(), s.getY(), s.len());
 		
 
 	}
