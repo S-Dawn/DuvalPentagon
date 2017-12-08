@@ -1,11 +1,13 @@
 package com.duval.datasource;
 
+import com.duval.utils.Coordinates;
+
 public class DSData {
 
 	double H2, C2H6, CH4, C2H4, C2H2;
 	
 	String Fault, PredictedFault;
-	
+	Coordinates faultcoordinates;
 	boolean match;
 
 	public DSData(double h2, double c2h6, double cH4, double c2h4, double c2h2, String fault) {
@@ -17,6 +19,7 @@ public class DSData {
 		C2H2 = c2h2;
 		Fault = fault;
 		this.match = false;
+		this.faultcoordinates = null;
 	}
 
 	public DSData() {
@@ -88,8 +91,17 @@ public class DSData {
 	}
 	
 	public boolean isAmbiguous() {
-		return !match;
+		return match;
 	}
+	
+	public Coordinates getFaultcoordinates() {
+		return faultcoordinates;
+	}
+
+	public void setFaultcoordinates(Coordinates faultcoordinates) {
+		this.faultcoordinates = faultcoordinates;
+	}
+
 
 	@Override
 	public String toString() {

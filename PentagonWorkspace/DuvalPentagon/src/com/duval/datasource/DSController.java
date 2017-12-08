@@ -1,6 +1,7 @@
 package com.duval.datasource;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -11,8 +12,6 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import com.duval.components.Fault;
 
 public class DSController {
 
@@ -44,14 +43,13 @@ public class DSController {
 
 			row = (XSSFRow) rows.next();
 			cells = row.cellIterator();
-			
+
 			cell = (XSSFCell) cells.next();
 			obj.setFault(cell.getStringCellValue());
 
-
 			cell = (XSSFCell) cells.next();
 			obj.setH2(cell.getNumericCellValue());
-			
+
 			cell = (XSSFCell) cells.next();
 			obj.setC2H6(cell.getNumericCellValue());
 
@@ -63,12 +61,98 @@ public class DSController {
 
 			cell = (XSSFCell) cells.next();
 			obj.setC2H2(cell.getNumericCellValue());
-			
+
 			list.add(obj);
-			
+
 		}
-		
+
 		return list;
+
+	}
+
+	public DSData readRow(int rowNumber) throws IOException {
+		InputStream ExcelFileToRead = new FileInputStream(fileURL);
+		XSSFWorkbook wb = new XSSFWorkbook(ExcelFileToRead);
+		XSSFSheet sheet = wb.getSheetAt(0);
+		XSSFRow row;
+		XSSFCell cell;
+
+		Iterator rows = sheet.rowIterator();
+		Iterator cells;
+
+		rows.next();
+		DSData obj = new DSData();
+
+		for (int i = 0; i < rowNumber && rows.hasNext(); i++, rows.next());
+		
+		row = (XSSFRow) rows.next();
+		cells = row.cellIterator();
+
+		cell = (XSSFCell) cells.next();
+		obj.setFault(cell.getStringCellValue());
+
+		cell = (XSSFCell) cells.next();
+		obj.setPredictedFault(cell.getStringCellValue());
+		
+		cell = (XSSFCell) cells.next();
+		obj.setH2(cell.getNumericCellValue());
+
+		cell = (XSSFCell) cells.next();
+		obj.setC2H6(cell.getNumericCellValue());
+
+		cell = (XSSFCell) cells.next();
+		obj.setCH4(cell.getNumericCellValue());
+
+		cell = (XSSFCell) cells.next();
+		obj.setC2H4(cell.getNumericCellValue());
+
+		cell = (XSSFCell) cells.next();
+		obj.setC2H2(cell.getNumericCellValue());
+
+		return obj;
+
+	}
+
+	public void writeDS(List<DSData> list) throws IOException {
+
+		String excelFileName = this.fileURL;
+
+		String sheetName = "Sheet1";// name of sheet
+
+		XSSFWorkbook wb = new XSSFWorkbook();
+		XSSFSheet sheet = wb.createSheet(sheetName);
+
+		for (int r = 0; r < list.size(); r++) {
+			DSData obj = list.get(r);
+			XSSFRow row = sheet.createRow(r);
+
+			XSSFCell cellFault = row.createCell(0);
+			cellFault.setCellValue(obj.getFault());
+
+			XSSFCell cellPredictedFault = row.createCell(1);
+			cellPredictedFault.setCellValue(obj.getPredictedFault());
+
+			XSSFCell cellH2 = row.createCell(2);
+			cellH2.setCellValue(obj.getH2());
+
+			XSSFCell cellC2H6 = row.createCell(3);
+			cellC2H6.setCellValue(obj.getC2H6());
+
+			XSSFCell cellCH4 = row.createCell(4);
+			cellCH4.setCellValue(obj.getCH4());
+
+			XSSFCell cellC2H4 = row.createCell(5);
+			cellC2H4.setCellValue(obj.getC2H4());
+
+			XSSFCell cellC2H2 = row.createCell(6);
+			cellC2H2.setCellValue(obj.getC2H2());
+
+		}
+
+		FileOutputStream fileOut = new FileOutputStream(excelFileName);
+		wb.write(fileOut);
+		fileOut.flush();
+		fileOut.close();
 
 	}
 

@@ -19,6 +19,7 @@ import com.duval.components.T1Fault;
 import com.duval.components.T2Fault;
 import com.duval.components.T3Fault;
 
+@SuppressWarnings("serial")
 public class Helper extends JPanel {
 
 	public void paintComponent(Graphics g) {
@@ -28,26 +29,30 @@ public class Helper extends JPanel {
 
 		int xorigin = 400;
 		int yorigin = 200;
-		int scale = 2;
+		int scale = 3;
 
 		// Creation of the Extreme Points
-		p.addPoint(xorigin + 0*scale, yorigin - 100*scale);
-		p.addPoint(xorigin - 95*scale, yorigin - 31*scale);
-		p.addPoint(xorigin - 59*scale, yorigin + 81*scale);
-		p.addPoint(xorigin + 59*scale, yorigin + 81*scale);
-		p.addPoint(xorigin + 95*scale, yorigin - 31*scale);
+		p.addPoint(xorigin + 0 * scale, yorigin - 100 * scale);
+		p.addPoint(xorigin - 95 * scale, yorigin - 31 * scale);
+		p.addPoint(xorigin - 59 * scale, yorigin + 81 * scale);
+		p.addPoint(xorigin + 59 * scale, yorigin + 81 * scale);
+		p.addPoint(xorigin + 95 * scale, yorigin - 31 * scale);
 
 		g.drawPolygon(p);
+		g.drawLine(xorigin, yorigin, xorigin + 0 * scale, yorigin - 100 * scale);
+		g.drawLine(xorigin, yorigin, xorigin - 95 * scale, yorigin - 31 * scale);
+		g.drawLine(xorigin, yorigin, xorigin - 59 * scale, yorigin + 81 * scale);
+		g.drawLine(xorigin, yorigin, xorigin + 59 * scale, yorigin + 81 * scale);
+		g.drawLine(xorigin, yorigin, xorigin + 95 * scale, yorigin - 31 * scale);
 
 		// Creation of the Boundaries
 
-		
 		g.setColor(Color.CYAN);
 		Fault pd = new PDFault(xorigin, yorigin, scale);
-		g.fillPolygon(pd.getX(),pd.getY(),pd.len());
+		g.fillPolygon(pd.getX(), pd.getY(), pd.len());
 		g.setColor(Color.PINK);
 		Fault d1 = new D1Fault(xorigin, yorigin, scale);
-		g.fillPolygon(d1.getX(),d1.getY(), d1.len());
+		g.fillPolygon(d1.getX(), d1.getY(), d1.len());
 		g.setColor(Color.GREEN);
 		Fault d2 = new D2Fault(xorigin, yorigin, scale);
 		g.fillPolygon(d2.getX(), d2.getY(), d2.len());
@@ -63,10 +68,11 @@ public class Helper extends JPanel {
 		g.setColor(Color.RED);
 		Fault s = new SFault(xorigin, yorigin, scale);
 		g.fillPolygon(s.getX(), s.getY(), s.len());
-		
+		System.out.println(s.getX() + "" + s.getY() + s.len());
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void showFrame() {
 		JFrame frame = new JFrame();
 		frame.setTitle("MarkI");
@@ -80,12 +86,7 @@ public class Helper extends JPanel {
 		contentPane.add(new Helper());
 
 		frame.show();
-		
-	}
-	
 
-	
-	
-	
-	
+	}
+
 }

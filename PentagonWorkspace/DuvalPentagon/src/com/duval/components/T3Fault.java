@@ -10,7 +10,7 @@ public class T3Fault extends Fault{
 	}
 
 	public int len() {
-		return 4;
+		return 5;
 	}
 	
 	@Override
@@ -20,6 +20,7 @@ public class T3Fault extends Fault{
 		p[1] = new Coordinates(-1,-2);
 		p[2] = new Coordinates(-6,-4);
 		p[3] = new Coordinates(1,-32);
+		p[4] = new Coordinates(23, -32);
 		
 		super.points = p;
 	}

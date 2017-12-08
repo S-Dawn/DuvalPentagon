@@ -10,7 +10,7 @@ public class SFault extends Fault {
 	}
 
 	public int len() {
-		return 7;
+		return 8;
 	}
 	
 	@Override
@@ -23,7 +23,7 @@ public class SFault extends Fault {
 		p[4] = new Coordinates(-1,24);
 		p[5] = new Coordinates(-1,33);
 		p[6] = new Coordinates(0,40);
-		
+		p[7] = new Coordinates(-38, 12);
 		super.points = p;
 	}
 

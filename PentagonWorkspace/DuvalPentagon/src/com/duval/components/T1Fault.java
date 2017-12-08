@@ -10,17 +10,18 @@ public class T1Fault extends Fault{
 	}
 		
 	public int len() {
-		return 5;
+		return 6;
 	}
 	
 	@Override
 	public void initPoints() {
 		Coordinates p[] = new Coordinates[len()];
-		p[0] = new Coordinates(-23,-32);
+		p[0] = new Coordinates(-22,-32);
 		p[1] = new Coordinates(-6,-4);
 		p[2] = new Coordinates(-1,-2);
 		p[3] = new Coordinates(0,2);
 		p[4] = new Coordinates(-35,3);
+		p[5] = new Coordinates(-24, -32);
 		
 		super.points = p;
 	}

@@ -1,7 +1,5 @@
 package com.duval.utils;
 
-import java.awt.Color;
-
 import com.duval.components.D1Fault;
 import com.duval.components.D2Fault;
 import com.duval.components.Fault;

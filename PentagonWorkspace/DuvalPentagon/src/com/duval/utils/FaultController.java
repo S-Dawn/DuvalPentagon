@@ -26,6 +26,10 @@ public class FaultController {
 		init(a, b, c, d, e);
 		return getCentroid();
 	}
+	
+	public Coordinates [] getPentagonCoordinate() {
+		return this.coor;
+	}
 
 	void init (double a, double b, double c, double d, double e) {
 		this.a = a;

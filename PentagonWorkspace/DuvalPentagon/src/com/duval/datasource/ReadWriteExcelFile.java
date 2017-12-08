@@ -152,11 +152,11 @@ public class ReadWriteExcelFile {
 
 		// writeXLSXFile();
 		
-		ReadWriteExcelFile obj = new ReadWriteExcelFile("D:\\2nd Lab\\DGA DATASET EXCCEL.xlsx");
+		ReadWriteExcelFile obj = new ReadWriteExcelFile("G:\\2nd Lab\\DGA DATASET EXCCEL.xlsx");
 		
 		obj.readXLSXFile();
 		
-		DSController cont = new DSController("D:\\2nd Lab\\DGA DATASET EXCCEL.xlsx");
+		DSController cont = new DSController("G:\\2nd Lab\\DGA DATASET EXCCEL.xlsx");
 		System.out.println(cont.readDS());
 
 	}
