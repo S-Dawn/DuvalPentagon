@@ -1,0 +1,29 @@
+package com.duval.utils;
+
+import java.util.List;
+
+import com.duval.datasource.DSController;
+import com.duval.datasource.DSData;
+
+public class Controller {
+
+	private FaultController fc;;
+	private DSController dc;
+	
+	private List<DSData> dataset;
+	
+	public Controller (String fileName) throws Exception {
+		init(fileName);
+	}
+	
+	public void init(String fileName) throws Exception {
+		this.fc = new FaultController();
+		this.dc = new DSController(fileName);
+		this.dataset = dc.readDS();
+	}
+	
+	
+	
+	
+	
+}

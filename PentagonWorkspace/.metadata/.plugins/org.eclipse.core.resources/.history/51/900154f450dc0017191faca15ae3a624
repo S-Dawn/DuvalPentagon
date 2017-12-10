@@ -1,0 +1,52 @@
+package com.duval.utils;
+
+import java.util.Iterator;
+import java.util.List;
+
+import com.duval.datasource.DSController;
+import com.duval.datasource.DSData;
+
+public class Controller {
+
+	private FaultController fc;;
+	private DSController dc;
+	
+	private List<DSData> dataset;
+	private Painter canvas;
+	
+	public Controller (String fileName) throws Exception {
+		init(fileName);
+	}
+	
+	public void init(String fileName) throws Exception {
+		this.fc = new FaultController();
+		this.dc = new DSController(fileName);
+		this.dataset = dc.readDS();
+	}
+	
+	public void predictFaults() {
+		Coordinates p;
+		DSData data;
+		Detector obj = new Detector(400, 200);
+		for (int i=0; i<dataset.size(); i++) {
+			data = dataset.get(i);
+			p = fc.getFaultPoints(data);
+			data.setPredictedFault(obj.FaultType(p));
+		}
+	}
+	
+	public void createCanvas() {
+		Painter canvas = new Painter(800,600,3);
+    	canvas.show();
+	}
+	
+	public void displayFaults() {
+		DSData itr;
+		for(itr:dataset) {
+			
+		}
+	}
+	
+	
+	
+}

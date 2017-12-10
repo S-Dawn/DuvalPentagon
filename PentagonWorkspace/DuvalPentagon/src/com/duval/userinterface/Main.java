@@ -37,6 +37,10 @@ public class Main {
 				int row = sc.nextInt();
 				p.displayPentagon(row);
 				break;
+				
+			case 6:
+				System.out.println("Fault Points Count Detected: " + p.countFaultPoints());
+				break;
 
 			default:
 				showMenu();
@@ -54,6 +58,7 @@ public class Main {
 		System.out.println("3: Display Fault Points");
 		System.out.println("4: Display Ok Points");
 		System.out.println("5: Display Pentagon");
+		System.out.println("6: Count Fault Points");
 
 	}
 }

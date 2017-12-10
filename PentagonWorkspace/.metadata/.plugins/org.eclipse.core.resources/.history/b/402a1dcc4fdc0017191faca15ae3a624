@@ -1,0 +1,142 @@
+package com.duval.utils;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Polygon;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.util.Random;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.Timer;
+
+import com.duval.components.D1Fault;
+import com.duval.components.D2Fault;
+import com.duval.components.Fault;
+import com.duval.components.PDFault;
+import com.duval.components.SFault;
+import com.duval.components.T1Fault;
+import com.duval.components.T2Fault;
+import com.duval.components.T3Fault;
+
+public class Painter {
+
+	JLabel view;
+    BufferedImage surface;
+    Random random = new Random();
+    int height, width;
+    int xorigin, yorigin, scale;
+    
+    public Painter (int height, int width) {
+    	this.height = height;
+    	this.width = width;
+    	xorigin = height/2;
+		yorigin = width/2;
+		scale = 3;
+
+    	init();
+    }
+
+    public void init()
+    {
+        surface = new BufferedImage(height,width,BufferedImage.TYPE_INT_RGB);
+        view = new JLabel(new ImageIcon(surface));
+        Graphics g = surface.getGraphics();
+        g.setColor(Color.WHITE);
+        g.fillRect(0,0,800,600);
+        g.setColor(Color.BLACK);
+        
+        Polygon p = new Polygon();
+
+		// Creation of the Extreme Points
+		p.addPoint(xorigin + 0 * scale, yorigin - 100 * scale);
+		p.addPoint(xorigin - 95 * scale, yorigin - 31 * scale);
+		p.addPoint(xorigin - 59 * scale, yorigin + 81 * scale);
+		p.addPoint(xorigin + 59 * scale, yorigin + 81 * scale);
+		p.addPoint(xorigin + 95 * scale, yorigin - 31 * scale);
+
+		g.drawPolygon(p);
+		g.drawLine(xorigin, yorigin, xorigin + 0 * scale, yorigin - 100 * scale);
+		g.drawLine(xorigin, yorigin, xorigin - 95 * scale, yorigin - 31 * scale);
+		g.drawLine(xorigin, yorigin, xorigin - 59 * scale, yorigin + 81 * scale);
+		g.drawLine(xorigin, yorigin, xorigin + 59 * scale, yorigin + 81 * scale);
+		g.drawLine(xorigin, yorigin, xorigin + 95 * scale, yorigin - 31 * scale);
+
+		// Creation of the Boundaries
+
+		g.setColor(Color.CYAN);
+		Fault pd = new PDFault(xorigin, yorigin, scale);
+		g.fillPolygon(pd.getX(), pd.getY(), pd.len());
+		g.setColor(Color.PINK);
+		Fault d1 = new D1Fault(xorigin, yorigin, scale);
+		g.fillPolygon(d1.getX(), d1.getY(), d1.len());
+		g.setColor(Color.GREEN);
+		Fault d2 = new D2Fault(xorigin, yorigin, scale);
+		g.fillPolygon(d2.getX(), d2.getY(), d2.len());
+		g.setColor(Color.ORANGE);
+		Fault t3 = new T3Fault(xorigin, yorigin, scale);
+		g.fillPolygon(t3.getX(), t3.getY(), t3.len());
+		g.setColor(Color.PINK);
+		Fault t2 = new T2Fault(xorigin, yorigin, scale);
+		g.fillPolygon(t2.getX(), t2.getY(), t2.len());
+		g.setColor(Color.YELLOW);
+		Fault t1 = new T1Fault(xorigin, yorigin, scale);
+		g.fillPolygon(t1.getX(), t1.getY(), t1.len());
+		g.setColor(Color.RED);
+		Fault s = new SFault(xorigin, yorigin, scale);
+		g.fillPolygon(s.getX(), s.getY(), s.len());      
+        
+        g.dispose();
+
+//        ActionListener listener = new ActionListener() {
+//            public void actionPerformed(ActionEvent ae) {
+//                addNewElement();
+//            }
+//        };
+//        Timer timer = new Timer(200, listener);
+//        timer.start();
+    }
+
+    public void addNewElement(Coordinates p, boolean match) {
+        Graphics g = surface.getGraphics();
+        if (match) {
+            g.setColor(Color.BLUE);
+            drawNode(p,g);
+        } else {
+        	g.setColor(Color.RED);
+            drawNode(p,g);
+        }
+        g.dispose();
+        view.repaint();
+    }
+
+    public void show() {
+        JFrame frame = new JFrame();
+        int vertexes = 0;
+        vertexes = 10;
+        int canvasSize = vertexes * vertexes;
+        frame.setSize(canvasSize, canvasSize);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setContentPane(this.view);
+        frame.pack();
+        frame.setLocationByPlatform(true);
+        frame.setVisible(true);
+    }
+    
+    public static void main (String a[]) {
+    	Painter canvas = new Painter(800,600);
+    	canvas.show();
+    	canvas.addNewElement(new Coordinates(10, 10), true);
+    	
+    }
+
+    public void drawNode(Coordinates p, Graphics g)    {
+            int xLoc = xorigin + (p.getX()) - 5;
+            int yLoc = yorigin - (p.getY()) - 5;
+            g.fillOval(xLoc, yLoc, 5, 5);
+            g.drawOval(xLoc, yLoc, 5, 5);
+    }
+}

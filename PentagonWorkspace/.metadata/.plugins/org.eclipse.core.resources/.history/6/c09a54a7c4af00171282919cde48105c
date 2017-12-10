@@ -1,0 +1,39 @@
+package com.duval.components;
+
+public class PDFault {
+
+	int [] PDx;
+	int [] PDy;
+	
+	int xorigin;
+	int yorigin;
+	
+	public PDFault(int xorigin, int yorigin) {
+		super();
+		this.xorigin = xorigin;
+		this.yorigin = yorigin;
+	}
+	
+	public int[] getPDx() {
+		return new int[]{
+				xorigin + 0,
+				xorigin + 0,
+				xorigin + -1,
+				xorigin + -1
+				};
+	}
+	
+	public int[] getPDy() {
+		return new int[]{
+				yorigin - 24,
+				yorigin - 33,
+				yorigin - 24,
+				yorigin - 33
+				};
+	}
+	
+	public int len() {
+		return 4;
+	}
+	
+}

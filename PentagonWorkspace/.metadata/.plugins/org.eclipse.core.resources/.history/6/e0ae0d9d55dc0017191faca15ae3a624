@@ -1,0 +1,80 @@
+package com.duval.utils;
+
+import java.util.Iterator;
+import java.util.List;
+
+import com.duval.datasource.DSController;
+import com.duval.datasource.DSData;
+
+public class Controller {
+
+	private FaultController fc;;
+	private DSController dc, dc1;
+	
+	private List<DSData> dataset;
+	private Painter canvas;
+	
+	public Controller (String fileName) throws Exception {
+		init(fileName);
+	}
+	
+	public void init(String fileName) throws Exception {
+		this.fc = new FaultController();
+		this.dc = new DSController(fileName);
+		this.dataset = dc.readDS();
+	}
+	
+	public void predictFaults() {
+		Coordinates p;
+		DSData data;
+		Detector obj = new Detector(400, 200);
+		for (int i=0; i<dataset.size(); i++) {
+			data = dataset.get(i);
+			p = fc.getFaultPoints(data);
+			data.setPredictedFault(obj.FaultType(p));
+		}
+		
+	}
+	
+	public void createCanvas() {
+		this.canvas = new Painter(800,600,3);
+    	canvas.show();
+	}
+	
+	public void plotpoints() {
+		Iterator<DSData> itr  = dataset.iterator();
+		DSData obj;
+		Coordinates p;
+		while(itr.hasNext()) {
+			obj = itr.next();
+			p = fc.getFaultPoints(obj);
+			canvas.addNewElement(p, obj.isAmbiguous());
+		}
+	}
+	
+	public void displayFaultpoints() {
+		Iterator<DSData> itr  = dataset.iterator();
+		DSData obj;
+		Coordinates p;
+		while(itr.hasNext()) {
+			obj = itr.next();
+			p = fc.getFaultPoints(obj);
+			if(obj.isAmbiguous())
+				canvas.addNewElement(p, obj.isAmbiguous());
+		}
+	}
+	
+	public void displayOkpoints() {
+		Iterator<DSData> itr  = dataset.iterator();
+		DSData obj;
+		Coordinates p;
+		while(itr.hasNext()) {
+			obj = itr.next();
+			p = fc.getFaultPoints(obj);
+			if(!obj.isAmbiguous())
+				canvas.addNewElement(p, obj.isAmbiguous());
+		}
+	}
+	
+	
+}

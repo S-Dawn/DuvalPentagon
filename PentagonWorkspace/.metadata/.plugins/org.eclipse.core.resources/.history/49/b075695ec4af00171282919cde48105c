@@ -1,0 +1,41 @@
+package com.duval.components;
+
+public class T3Fault {
+
+	int D2x;
+	int D2y;
+	
+	int xorigin;
+	int yorigin;
+	
+	public D2Fault(int xorigin, int yorigin) {
+		super();
+		this.xorigin = xorigin;
+		this.yorigin = yorigin;
+	}
+	
+
+	public int[] getD2x(int xorigin) {
+		return new int[]{
+				xorigin + 4,
+				xorigin + 32,
+				xorigin + 24,
+				xorigin + -1
+				};
+	}
+	
+	public int[] getD2y(int yorigin) {
+		return new int[]{
+				yorigin - 16,
+				yorigin - -6,
+				yorigin - -30,
+				yorigin - -2
+				};
+	}
+		
+	public int len() {
+		return 4;
+	}
+	
+	
+}

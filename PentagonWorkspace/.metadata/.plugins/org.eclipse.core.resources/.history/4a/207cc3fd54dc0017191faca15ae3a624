@@ -1,0 +1,118 @@
+package com.duval.datasource;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class DSController {
+
+	String fileURL;
+
+	public DSController(String fileURL) {
+		super();
+		this.fileURL = fileURL;
+	}
+
+	public List<DSData> readDS() throws IOException {
+		InputStream ExcelFileToRead = new FileInputStream(fileURL);
+		XSSFWorkbook wb = new XSSFWorkbook(ExcelFileToRead);
+		XSSFSheet sheet = wb.getSheetAt(0);
+		XSSFRow row;
+		XSSFCell cell;
+
+		Iterator rows = sheet.rowIterator();
+		Iterator cells;
+
+		rows.next();
+
+		List<DSData> list = new ArrayList<DSData>();
+		DSData obj = null;
+
+		while (rows.hasNext()) {
+
+			obj = new DSData();
+
+			row = (XSSFRow) rows.next();
+			cells = row.cellIterator();
+
+			cell = (XSSFCell) cells.next();
+			obj.setFault(cell.getStringCellValue());
+
+			cell = (XSSFCell) cells.next();
+			obj.setH2(cell.getNumericCellValue());
+
+			cell = (XSSFCell) cells.next();
+			obj.setC2H6(cell.getNumericCellValue());
+
+			cell = (XSSFCell) cells.next();
+			obj.setCH4(cell.getNumericCellValue());
+
+			cell = (XSSFCell) cells.next();
+			obj.setC2H4(cell.getNumericCellValue());
+
+			cell = (XSSFCell) cells.next();
+			obj.setC2H2(cell.getNumericCellValue());
+
+			list.add(obj);
+
+		}
+
+		return list;
+
+	}
+
+	public void writeDS(List<DSData> list) throws IOException {
+
+		String excelFileName = this.fileURL;
+
+		String sheetName = "Sheet1";// name of sheet
+
+		XSSFWorkbook wb = new XSSFWorkbook();
+		XSSFSheet sheet = wb.createSheet(sheetName);
+
+
+		for (int r = 0; r < list.size(); r++) {
+			DSData obj = list.get(r);
+			XSSFRow row = sheet.createRow(r);
+			
+			XSSFCell cellFault = row.createCell(0);
+			cellFault.setCellValue(obj.getFault());
+			
+			XSSFCell cellH2 = row.createCell(0);
+			cellH2.setCellValue(obj.getH2());
+			
+			XSSFCell cellC2H6 = row.createCell(0);
+			cellC2H6.setCellValue(obj.getC2H6());
+
+			XSSFCell cellCH4 = row.createCell(0);
+			cellCH4.setCellValue(obj.getCH4());
+			
+			XSSFCell cellC2H4 = row.createCell(0);
+			cellC2H4.setCellValue(obj.getFault());
+			
+			XSSFCell cellC2H2 = row.createCell(0);
+			cellC2H2.setCellValue(obj.getFault());
+			
+			XSSFCell cellPredictedFault = row.createCell(0);
+			cellPredictedFault.setCellValue(obj.getFault());
+		}
+
+		FileOutputStream fileOut = new FileOutputStream(excelFileName);
+
+		// write this workbook to an Outputstream.
+		wb.write(fileOut);
+		fileOut.flush();
+		fileOut.close();
+
+	}
+
+}

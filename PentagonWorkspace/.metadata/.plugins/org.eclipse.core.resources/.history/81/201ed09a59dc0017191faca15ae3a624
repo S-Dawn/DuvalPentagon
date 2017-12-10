@@ -1,0 +1,27 @@
+package com.duval.userinterface;
+
+import com.duval.utils.Controller;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+    	
+    	Controller p = new Controller("G:\\2nd Lab\\DGA DATASET EXCCEL"); 
+    	p.predictFaults();
+    	p.createCanvas();
+    	//p.plotpoints();
+    	p.displayFaultpoints();
+    	p.displayPentagon(5);
+    	p.createCanvas();
+    	
+    }
+    
+
+    public static void showMenu() {
+    	
+    	System.out.println("1: Create NEW Canvas");
+    	System.out.println("2: Plot All Points");
+    	
+    }
+}
+           
+  

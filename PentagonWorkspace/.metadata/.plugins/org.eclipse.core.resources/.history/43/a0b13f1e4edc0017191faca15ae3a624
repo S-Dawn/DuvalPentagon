@@ -1,0 +1,21 @@
+package com.duval.userinterface;
+
+import com.duval.utils.Controller;
+import com.duval.utils.Coordinates;
+import com.duval.utils.Detector;
+import com.duval.utils.Helper;
+
+public class Main {
+    public static void main(String[] args) {
+    	Helper.showFrame();
+    	Controller p = new Controller("D:\\2nd Lab\\DGA DATASET EXCCEL.xlsx"); 
+    	
+    	Detector obj = new Detector(400, 200);
+    	
+    	System.out.println(p);
+    	
+    	
+    }
+}
+           
+  

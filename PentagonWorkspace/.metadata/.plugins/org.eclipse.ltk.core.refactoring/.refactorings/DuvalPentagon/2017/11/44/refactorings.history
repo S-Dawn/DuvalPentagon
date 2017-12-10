@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;com.duval.helper&apos; to &apos;com.duval.utils&apos;&#x0D;&#x0A;- Original project: &apos;DuvalPentagon&apos;&#x0D;&#x0A;- Original element: &apos;DuvalPentagon/src/com.duval.helper&apos;&#x0D;&#x0A;- Renamed element: &apos;DuvalPentagon/src/com.duval.utils&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;com.duval.helper&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;com.duval.helper" name="com.duval.utils" qualified="false" references="true" stamp="1509701207077" textual="false" version="1.0"/>
+</session>

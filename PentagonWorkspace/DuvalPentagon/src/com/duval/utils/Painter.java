@@ -59,6 +59,8 @@ public class Painter {
 		p.addPoint(xorigin + 95 * scale, yorigin - 31 * scale);
 
 		g.drawPolygon(p);
+		
+		g.setColor(Color.LIGHT_GRAY);
 		g.drawLine(xorigin, yorigin, xorigin + 0 * scale, yorigin - 100 * scale);
 		g.drawLine(xorigin, yorigin, xorigin - 95 * scale, yorigin - 31 * scale);
 		g.drawLine(xorigin, yorigin, xorigin - 59 * scale, yorigin + 81 * scale);
@@ -67,27 +69,21 @@ public class Painter {
 
 		// Creation of the Boundaries
 
-		g.setColor(Color.CYAN);
+		g.setColor(Color.BLACK);
 		Fault pd = new PDFault(xorigin, yorigin, scale);
-		g.fillPolygon(pd.getX(), pd.getY(), pd.len());
-		g.setColor(Color.PINK);
+		g.drawPolygon(pd.getX(), pd.getY(), pd.len());
 		Fault d1 = new D1Fault(xorigin, yorigin, scale);
-		g.fillPolygon(d1.getX(), d1.getY(), d1.len());
-		g.setColor(Color.GREEN);
+		g.drawPolygon(d1.getX(), d1.getY(), d1.len());
 		Fault d2 = new D2Fault(xorigin, yorigin, scale);
-		g.fillPolygon(d2.getX(), d2.getY(), d2.len());
-		g.setColor(Color.ORANGE);
+		g.drawPolygon(d2.getX(), d2.getY(), d2.len());
 		Fault t3 = new T3Fault(xorigin, yorigin, scale);
-		g.fillPolygon(t3.getX(), t3.getY(), t3.len());
-		g.setColor(Color.PINK);
+		g.drawPolygon(t3.getX(), t3.getY(), t3.len());
 		Fault t2 = new T2Fault(xorigin, yorigin, scale);
-		g.fillPolygon(t2.getX(), t2.getY(), t2.len());
-		g.setColor(Color.YELLOW);
+		g.drawPolygon(t2.getX(), t2.getY(), t2.len());
 		Fault t1 = new T1Fault(xorigin, yorigin, scale);
-		g.fillPolygon(t1.getX(), t1.getY(), t1.len());
-		g.setColor(Color.LIGHT_GRAY);
+		g.drawPolygon(t1.getX(), t1.getY(), t1.len());
 		Fault s = new SFault(xorigin, yorigin, scale);
-		g.fillPolygon(s.getX(), s.getY(), s.len());      
+		g.drawPolygon(s.getX(), s.getY(), s.len());      
         
         g.dispose();
 
@@ -107,6 +103,44 @@ public class Painter {
             drawNode(p,g);
         } else {
         	g.setColor(Color.RED);
+            drawNode(p,g);
+        }
+        g.dispose();
+        view.repaint();
+    }
+    
+    public void addNewElement(Coordinates p, String fault) {
+    	Graphics g = surface.getGraphics();
+        if (fault.equals("PD")) {
+            g.setColor(Color.YELLOW);
+            drawNode(p,g);
+        }
+        else if (fault.equals("D1")) {
+            g.setColor(Color.BLUE);
+            drawNode(p,g);
+        }
+        else if (fault.equals("D2")) {
+            g.setColor(Color.RED);
+            drawNode(p,g);
+        }
+        else if (fault.equals("T3")) {
+            g.setColor(Color.CYAN);
+            drawNode(p,g);
+        }
+        else if (fault.equals("T2")) {
+            g.setColor(Color.GREEN);
+            drawNode(p,g);
+        }
+        else if (fault.equals("T1")) {
+            g.setColor(Color.PINK);
+            drawNode(p,g);
+        }
+        else if (fault.equals("S")) {
+            g.setColor(Color.ORANGE);
+            drawNode(p,g);
+        }
+        else {
+        	g.setColor(Color.BLACK);
             drawNode(p,g);
         }
         g.dispose();

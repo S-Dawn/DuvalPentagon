@@ -1,0 +1,8 @@
+package com.duval.components;
+
+public class D1Fault {
+
+	int D1x;
+	int D1y;
+	
+}

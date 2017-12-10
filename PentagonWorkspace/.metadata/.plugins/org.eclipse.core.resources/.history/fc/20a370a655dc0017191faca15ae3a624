@@ -1,0 +1,18 @@
+package com.duval.userinterface;
+
+import com.duval.utils.Controller;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+    	
+    	Controller p = new Controller("G:\\2nd Lab\\DGA DATASET EXCCEL.xlsx"); 
+    	p.predictFaults();
+    	p.createCanvas();
+    	//p.plotpoints();
+    	p.displayFaultpoints();
+    	
+    	
+    }
+}
+           
+  

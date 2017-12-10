@@ -1,0 +1,19 @@
+package com.duval.components;
+
+public class D1Fault {
+
+	int D1x;
+	int D1y;
+	
+	int xorigin;
+	int yorigin;
+	
+	public D1Fault(int xorigin, int yorigin) {
+		super();
+		this.xorigin = xorigin;
+		this.yorigin = yorigin;
+	}
+	
+	
+	
+}

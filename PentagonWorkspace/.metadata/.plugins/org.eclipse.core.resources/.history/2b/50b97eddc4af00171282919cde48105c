@@ -1,0 +1,35 @@
+package com.duval.components;
+
+public class T1Fault {
+	int xorigin;
+	int yorigin;
+	
+	public T2Fault(int xorigin, int yorigin) {
+		super();
+		this.xorigin = xorigin;
+		this.yorigin = yorigin;
+	}
+	
+
+
+	public int[] getT2x(int xorigin) {
+		return new int[]{
+				xorigin + 1,
+				xorigin + -6,
+				xorigin + -22
+				};
+	}
+	
+	public int[] getT2y(int yorigin) {
+		return new int[]{
+				yorigin - 32,
+				yorigin - 4,
+				yorigin - -32
+				};
+	}
+			
+	public int len() {
+		return 3;
+	}
+	
+}

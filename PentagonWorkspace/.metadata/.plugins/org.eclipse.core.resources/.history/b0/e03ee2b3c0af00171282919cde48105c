@@ -1,0 +1,10 @@
+package com.duval.components;
+
+public class PDFault {
+
+	int [] PDx;
+	int [] PDy;
+	int length;
+	
+	
+}

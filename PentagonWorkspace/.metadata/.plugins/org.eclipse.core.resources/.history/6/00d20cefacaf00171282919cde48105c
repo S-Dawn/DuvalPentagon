@@ -1,0 +1,229 @@
+package com.duval.userinterface;
+
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+public class Main {
+	
+	Account obj;
+	AccessReference controller;
+	private JFrame mainFrame;
+	private JLabel headerLabel;
+	private JLabel statusLabel;
+	private JPanel controlPanel;
+
+	public UserHome(int accountId) {
+		this.controller = new AccountDao();
+		obj = controller.getAccount(accountId);
+		prepareGUI();
+		showGUI();
+	}
+
+	private void prepareGUI() {
+		mainFrame = new JFrame("Oracle Bank of India");
+		mainFrame.setSize(800, 400);
+		mainFrame.setLayout(new GridLayout(3, 1));
+		mainFrame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent windowEvent) {
+				System.exit(0);
+			}
+		});
+		headerLabel = new JLabel("", JLabel.CENTER);
+		statusLabel = new JLabel("", JLabel.CENTER);
+
+		statusLabel.setSize(350, 100);
+
+		controlPanel = new JPanel();
+		controlPanel.setLayout(new FlowLayout());
+
+		mainFrame.add(headerLabel);
+		mainFrame.add(controlPanel);
+		mainFrame.add(statusLabel);
+		mainFrame.setVisible(true);
+	}
+
+	private void showGUI() {
+		headerLabel.setText("Control in action: Oracle Bank of India");
+
+		JLabel idLabel = new JLabel("Account ID: " + obj.getAccountId(), JLabel.LEFT);
+		JLabel usernameLabel = new JLabel("UserName: " + obj.getHoldersName(), JLabel.CENTER);
+		JLabel balanceLabel = new JLabel("Balance: " + obj.getBalance(), JLabel.RIGHT);
+
+		JLabel valueLabel = new JLabel("Value: ", JLabel.RIGHT);
+		final JTextField valueText = new JTextField(6);
+
+		JButton withdrawButton = new JButton("Withdraw Money");
+		JButton depositButton = new JButton("Deposit Money");
+		JButton detailsButton = new JButton("View Details");
+		JButton saveButton = new JButton("Save");
+		JButton updateButton = new JButton("Update");
+		JButton deleteButton = new JButton("Delete");
+		JButton logoutButton = new JButton("logout");
+		
+		JLabel passwordLabel = new JLabel("Security Check Type Password: ", JLabel.CENTER);
+		final JPasswordField passwordText = new JPasswordField(6);
+		passwordLabel.setVisible(false);
+		passwordText.setVisible(false);
+		
+		deleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				passwordLabel.setVisible(true);
+				passwordText.setVisible(true);
+				JButton continueButton = new JButton("Continue Delete Operation");
+				continueButton.addActionListener(new ActionListener() {
+					@SuppressWarnings("deprecation")
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						if(passwordText.getText().equals(obj.getPassword())) {
+							if(controller.deleteAccount(obj.getAccountId())) {
+								JOptionPane.showMessageDialog(null, "Account Successfully deleted");
+								controlPanel.setVisible(false);
+								mainFrame.setVisible(false);
+								new UserInterface();
+							} else {
+								JOptionPane.showMessageDialog(null, "Invalid Password");
+							}
+						}
+					}
+					
+				});
+				controlPanel.add(continueButton);
+			}
+		});
+		
+		
+
+		withdrawButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				try {
+					double value = Double.parseDouble(valueText.getText());
+					if(controller.withdraw(obj.getAccountId(), value)){
+					JOptionPane.showMessageDialog(null, "Amount of Rs."+value+"is withdrawn from your account");
+					balanceLabel.setText("Balance : " + obj.getBalance());
+					}
+					valueText.setText(null);
+
+				} catch (MinBalanceThresholdException exp) {
+					JOptionPane.showMessageDialog(null, exp.toString());
+					// userText.setText(null);
+					valueText.setText(null);
+				} catch (OverDraftLimitThresholdException exp) {
+					JOptionPane.showMessageDialog(null, exp.toString());
+					// userText.setText(null);
+					valueText.setText(null);
+				} catch (NumberFormatException exp) {
+					statusLabel.setText("Invalid Value field");
+					// userText.setText(null);
+					valueText.setText(null);
+				} catch (NullPointerException exp) {
+					statusLabel.setText("No Clients Available");
+					// userText.setText(null);
+					valueText.setText(null);
+				} catch (Exception exp) {
+					statusLabel.setText("Internal Error");
+					// userText.setText(null);
+					valueText.setText(null);
+				}
+			}
+		});
+
+		depositButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				try {
+					double value = Double.parseDouble(valueText.getText());
+					if(controller.deposit(obj.getAccountId(), value)){
+						JOptionPane.showMessageDialog(null, "Amount of Rs."+value+"is deposited from your account");
+						balanceLabel.setText("Balance : " + obj.getBalance());
+						}
+					valueText.setText(null);
+
+				} catch (NumberFormatException exp) {
+					statusLabel.setText("Invalid Value field");
+					// userText.setText(null);
+					valueText.setText(null);
+				} catch (NullPointerException exp) {
+					statusLabel.setText("No Clients Available");
+					// userText.setText(null);
+					valueText.setText(null);
+				} catch (Exception exp) {
+					statusLabel.setText("Internal Error");
+					exp.printStackTrace();
+					// userText.setText(null);
+					valueText.setText(null);
+				}
+			}
+		});
+
+		detailsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null, obj);
+				valueText.setText(null);
+			}
+		});
+		
+		updateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new UpdateAccount(obj.getAccountId());	
+				controlPanel.resetKeyboardActions();
+				mainFrame.setVisible(false);
+				
+			}
+		});
+		
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.commit();
+				JOptionPane.showMessageDialog(null, "Details saved Successfully");
+			}
+		});
+
+		logoutButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.commit();
+				JOptionPane.showMessageDialog(null, "Logged out succesfully");
+				controlPanel.setVisible(false);
+				mainFrame.setVisible(false);
+				new UserInterface();
+
+			}
+		});
+
+		controlPanel.add(idLabel);
+		controlPanel.add(usernameLabel);
+		controlPanel.add(balanceLabel);
+		controlPanel.add(valueLabel);
+		controlPanel.add(valueText);
+		controlPanel.add(withdrawButton);
+		controlPanel.add(depositButton);
+		controlPanel.add(detailsButton);
+		controlPanel.add(updateButton);
+		controlPanel.add(saveButton);
+		controlPanel.add(deleteButton);
+		controlPanel.add(passwordLabel);
+		controlPanel.add(passwordText);
+		controlPanel.add(logoutButton);
+		mainFrame.setVisible(true);
+	}
+
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

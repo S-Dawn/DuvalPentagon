@@ -42,7 +42,7 @@ public class Controller {
 	}
 	
 	public void createCanvas() {
-		this.canvas = new Painter(800,600,3);
+		this.canvas = new Painter(800,600,1);
     	canvas.show();
 	}
 	
@@ -65,7 +65,7 @@ public class Controller {
 			obj = itr.next();
 			p = fc.getFaultPoints(obj);
 			if(obj.isAmbiguous())
-				canvas.addNewElement(p, obj.isAmbiguous());
+				canvas.addNewElement(p, obj.getFault());
 		}
 	}
 	
@@ -77,7 +77,7 @@ public class Controller {
 			obj = itr.next();
 			p = fc.getFaultPoints(obj);
 			if(!obj.isAmbiguous())
-				canvas.addNewElement(p, obj.isAmbiguous());
+				canvas.addNewElement(p, obj.getFault());
 		}
 	}
 	
@@ -89,4 +89,14 @@ public class Controller {
 		canvas.drawpentagon(coor, !obj.isAmbiguous());
 	}
 	
+	public int countFaultPoints() {
+		int i = 0;
+		int count = 0;
+		DSData obj = null;
+		for(i=0, count = 0;i<dataset.size();i++) {
+			obj = dataset.get(i);
+			if(obj.isAmbiguous()) count++;
+		}
+		return count;
+	}
 }

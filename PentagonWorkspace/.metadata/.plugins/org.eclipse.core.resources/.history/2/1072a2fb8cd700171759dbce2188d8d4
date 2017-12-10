@@ -1,0 +1,27 @@
+package com.duval.components;
+
+import com.duval.utils.Coordinates;
+
+public class T1Fault extends Fault{
+	
+	public T1Fault(int xorigin, int yorigin, int scale) {
+		super(xorigin, yorigin, scale, "T1");
+		initPoints();
+	}
+		
+	public int len() {
+		return 5;
+	}
+	
+	@Override
+	public void initPoints() {
+		Coordinates p[] = new Coordinates[len()];
+		p[0] = new Coordinates(-23,-32);
+		p[1] = new Coordinates(-6,-4);
+		p[2] = new Coordinates(-1,-2);
+		p[3] = new Coordinates(0,2);
+		p[4] = new Coordinates(-35,3);
+		
+		super.points = p;
+	}
+}
