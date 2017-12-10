@@ -161,8 +161,8 @@ public class Painter {
     }
 
     public void drawNode(Coordinates p, Graphics g)    {
-            int xLoc = xorigin + (p.getX()) - 5;
-            int yLoc = yorigin - (p.getY()) - 5;
+            int xLoc = xorigin + (p.getX()*scale) - 5;
+            int yLoc = yorigin - (p.getY()*scale) - 5;
             g.fillOval(xLoc, yLoc, scale, scale);
             g.drawOval(xLoc, yLoc, scale, scale);
     }
