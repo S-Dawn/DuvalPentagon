@@ -6,7 +6,6 @@
 <fullyQualifiedTypeName name="com.duval.components.T3Fault"/>
 <fullyQualifiedTypeName name="com.duval.components.T2Fault"/>
 <fullyQualifiedTypeName name="com.duval.components.T1Fault"/>
-<fullyQualifiedTypeName name="com.duval.utils.Controller"/>
 <fullyQualifiedTypeName name="com.duval.components.SFault"/>
 <fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
 <fullyQualifiedTypeName name="org.apache.poi.xssf.usermodel.XSSFWorkbook"/>
@@ -17,7 +16,6 @@
 <fullyQualifiedTypeName name="com.duval.components.Fault"/>
 <fullyQualifiedTypeName name="com.duval.datasource.Data"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
-<fullyQualifiedTypeName name="com.duval.utils.FaultController"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.duval.utils.Detector"/>
@@ -27,16 +25,20 @@
 <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
 <fullyQualifiedTypeName name="java.awt.Graphics"/>
 <fullyQualifiedTypeName name="java.awt.Color"/>
-<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
 <fullyQualifiedTypeName name="java.util.Timer"/>
 <fullyQualifiedTypeName name="javax.swing.Timer"/>
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
-<fullyQualifiedTypeName name="com.duval.utils.Coordinates"/>
 <fullyQualifiedTypeName name="java.util.Iterator"/>
 <fullyQualifiedTypeName name="com.duval.datasource.DSController"/>
 <fullyQualifiedTypeName name="com.duval.datasource.DSData"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="java.lang.ExceptionInInitializerError"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.awt.Button"/>
+<fullyQualifiedTypeName name="javax.swing.JButton"/>
+<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
+<fullyQualifiedTypeName name="com.duval.utils.Controller"/>
+<fullyQualifiedTypeName name="com.duval.utils.Coordinates"/>
+<fullyQualifiedTypeName name="com.duval.utils.FaultController"/>
 </qualifiedTypeNameHistroy>

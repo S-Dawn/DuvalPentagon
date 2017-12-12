@@ -9,10 +9,9 @@ import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.Timer;
-
 import com.duval.components.D1Fault;
 import com.duval.components.D2Fault;
 import com.duval.components.Fault;
@@ -29,18 +28,23 @@ public class Painter {
     Random random = new Random();
     int height, width;
     int xorigin, yorigin, scale;
+    JFrame frame;
+    JButton resetCanvas, plotpoints, plotfaultpoints, plotokpoints, plotpentagon, countfaultpoints;
+    Controller cont;
     
-    public Painter (int height, int width, int scale) {
+    public Painter (int height, int width, int scale) throws Exception {
     	this.height = height;
     	this.width = width;
     	xorigin = height/2;
 		yorigin = width/2;
 		this.scale = scale;
+    	frame = new JFrame();
 
-    	init();
+    	createCanvas();
+    	initButtons();
     }
 
-    public void init()
+    public void createCanvas()
     {
         surface = new BufferedImage(height,width,BufferedImage.TYPE_INT_RGB);
         view = new JLabel(new ImageIcon(surface));
@@ -87,13 +91,6 @@ public class Painter {
         
         g.dispose();
 
-//        ActionListener listener = new ActionListener() {
-//            public void actionPerformed(ActionEvent ae) {
-//                addNewElement();
-//            }
-//        };
-//        Timer timer = new Timer(200, listener);
-//        timer.start();
     }
 
     public void addNewElement(Coordinates p, boolean match) {
@@ -146,23 +143,51 @@ public class Painter {
         g.dispose();
         view.repaint();
     }
+    
+    public void initButtons() {
+    	resetCanvas = new JButton("Reset Canvas");
+    	plotpoints = new JButton("Plot Points");
+    	plotfaultpoints = new JButton("Plot Fault Points");
+    	plotokpoints = new JButton("Plot Ok Points");
+    	plotpentagon = new JButton("Plot Pentagon");
+    	countfaultpoints = new JButton("Count Fault Points");
+    	
+    	resetCanvas.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				createCanvas();
+			}
+		});
+    	
+    	plotpoints.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+    	
+    }
 
     public void show() {
-        JFrame frame = new JFrame();
+        
         int vertexes = 0;
         vertexes = 10;
         int canvasSize = vertexes * vertexes;
         frame.setSize(canvasSize, canvasSize);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(this.view);
+        frame.add(resetCanvas);
+        frame.add(plotpoints);
+        frame.add(plotfaultpoints);
         frame.pack();
         frame.setLocationByPlatform(true);
         frame.setVisible(true);
     }
 
     public void drawNode(Coordinates p, Graphics g)    {
-            int xLoc = xorigin + (p.getX()*scale) - 5;
-            int yLoc = yorigin - (p.getY()*scale) - 5;
+            int xLoc = (int) (xorigin + (p.getX()*scale) - 5);
+            int yLoc = (int) (yorigin - (p.getY()*scale) - 5);
             g.fillOval(xLoc, yLoc, scale, scale);
             g.drawOval(xLoc, yLoc, scale, scale);
     }
@@ -176,11 +201,11 @@ public class Painter {
     	else {
     		g.setColor(Color.RED);
     	}
-		p.addPoint(xorigin + coor[0].getX() * scale, yorigin - coor[0].getY() * scale);
-		p.addPoint(xorigin + coor[1].getX() * scale, yorigin - coor[1].getY() * scale);
-		p.addPoint(xorigin + coor[2].getX() * scale, yorigin - coor[2].getY() * scale);
-		p.addPoint(xorigin + coor[3].getX() * scale, yorigin - coor[3].getY() * scale);
-		p.addPoint(xorigin + coor[4].getX() * scale, yorigin - coor[4].getY() * scale);
+		p.addPoint((int)(xorigin + coor[0].getX() * scale), (int) (yorigin - coor[0].getY() * scale));
+		p.addPoint((int)(xorigin + coor[1].getX() * scale), (int) (yorigin - coor[1].getY() * scale));
+		p.addPoint((int)(xorigin + coor[2].getX() * scale), (int) (yorigin - coor[2].getY() * scale));
+		p.addPoint((int)(xorigin + coor[3].getX() * scale), (int) (yorigin - coor[3].getY() * scale));
+		p.addPoint((int)(xorigin + coor[4].getX() * scale), (int) (yorigin - coor[4].getY() * scale));
 		g.drawPolygon(p);
     }
 }

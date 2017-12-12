@@ -27,7 +27,7 @@ public abstract class Fault {
 		int res[] = new int[len()];
 
 		for (int i = 0; i < len(); i++) {
-			res[i] = xorigin + points[i].getX()*scale;
+			res[i] = (int) (xorigin + points[i].getX()*scale);
 		}
 
 		return res;
@@ -37,7 +37,7 @@ public abstract class Fault {
 		int res[] = new int[len()];
 
 		for (int i = 0; i < len(); i++) {
-			res[i] = yorigin - points[i].getY()*scale;
+			res[i] = (int) (yorigin - points[i].getY()*scale);
 		}
 
 		return res;

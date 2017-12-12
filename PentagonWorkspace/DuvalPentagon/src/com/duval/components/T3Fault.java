@@ -20,7 +20,7 @@ public class T3Fault extends Fault{
 		p[1] = new Coordinates(-1,-2);
 		p[2] = new Coordinates(-6,-4);
 		p[3] = new Coordinates(1,-32);
-		p[4] = new Coordinates(23, -32);
+		p[4] = new Coordinates(23.5, -32.4);
 		
 		super.points = p;
 	}

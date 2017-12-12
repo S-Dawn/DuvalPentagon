@@ -41,8 +41,8 @@ public class Controller {
 		dc1.writeDS(dataset);
 	}
 	
-	public void createCanvas() {
-		this.canvas = new Painter(800,600,1);
+	public void createCanvas() throws Exception {
+		this.canvas = new Painter(800,600,3);
     	canvas.show();
 	}
 	
@@ -53,7 +53,7 @@ public class Controller {
 		while(itr.hasNext()) {
 			obj = itr.next();
 			p = fc.getFaultPoints(obj);
-			canvas.addNewElement(p, obj.isAmbiguous());
+			canvas.addNewElement(p, obj.getFault());
 		}
 	}
 	
@@ -81,12 +81,24 @@ public class Controller {
 		}
 	}
 	
+	public void displayFault(String fault) {
+		Iterator<DSData> itr  = dataset.iterator();
+		DSData obj;
+		Coordinates p;
+		while(itr.hasNext()) {
+			obj = itr.next();
+			p = fc.getFaultPoints(obj);
+			if(fault.equals(obj.getFault()))
+				canvas.addNewElement(p, obj.getFault());
+		}
+	}
+	
 	public void displayPentagon(int row) throws IOException {
 		DSData obj = dc1.readRow(row);
 		Coordinates p = fc.getFaultPoints(obj);
 		Coordinates coor[] = fc.getPentagonCoordinate();
-		canvas.addNewElement(p, !obj.isAmbiguous());
-		canvas.drawpentagon(coor, !obj.isAmbiguous());
+		canvas.addNewElement(p, obj.getPredictedFault());
+		canvas.drawpentagon(coor, obj.isAmbiguous());
 	}
 	
 	public int countFaultPoints() {

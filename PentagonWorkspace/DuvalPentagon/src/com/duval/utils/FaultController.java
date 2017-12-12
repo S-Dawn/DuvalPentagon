@@ -65,28 +65,28 @@ public class FaultController {
 		double ddeg = 360-54;
 		double edeg = 18;
 		
-		int x, y;
+		double x, y;
 		
 		coor = new Coordinates[5];
 		
-		x = (int) (ar*Math.cos(Math.toRadians(adeg)));
-		y = (int) (ar*Math.sin(Math.toRadians(adeg)));
+		x = (ar*Math.cos(Math.toRadians(adeg)));
+		y = (ar*Math.sin(Math.toRadians(adeg)));
 		coor[0] = new Coordinates(x, y);
 		
-		x = (int) (br*Math.cos(Math.toRadians(bdeg)));
-		y = (int) (br*Math.sin(Math.toRadians(bdeg)));
+		x = (br*Math.cos(Math.toRadians(bdeg)));
+		y = (br*Math.sin(Math.toRadians(bdeg)));
 		coor[1] = new Coordinates(x, y);
 		
-		x = (int) (cr*Math.cos(Math.toRadians(cdeg)));
-		y = (int) (cr*Math.sin(Math.toRadians(cdeg)));
+		x = (cr*Math.cos(Math.toRadians(cdeg)));
+		y = (cr*Math.sin(Math.toRadians(cdeg)));
 		coor[2] = new Coordinates(x, y);
 		
-		x = (int) (dr*Math.cos(Math.toRadians(ddeg)));
-		y = (int) (dr*Math.sin(Math.toRadians(ddeg)));
+		x = (dr*Math.cos(Math.toRadians(ddeg)));
+		y = (dr*Math.sin(Math.toRadians(ddeg)));
 		coor[3] = new Coordinates(x, y);
 		
-		x = (int) (er*Math.cos(Math.toRadians(edeg)));
-		y = (int) (er*Math.sin(Math.toRadians(edeg)));
+		x = (er*Math.cos(Math.toRadians(edeg)));
+		y = (er*Math.sin(Math.toRadians(edeg)));
 		coor[4] = new Coordinates(x, y);
 		
 	}
@@ -112,7 +112,7 @@ public class FaultController {
 		Cx = Cx/(6*A);
 		Cy = Cy/(6*A);
 		
-		centroid = new Coordinates((int)Cx, (int)Cy);
+		centroid = new Coordinates(Cx, Cy);
 	}
 	
 	

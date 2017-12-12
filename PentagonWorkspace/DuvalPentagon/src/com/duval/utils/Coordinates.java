@@ -2,23 +2,23 @@ package com.duval.utils;
 
 public class Coordinates {
 
-	int x;
-	int y;
-	public Coordinates(int x, int y) {
+	double x;
+	double y;
+	public Coordinates(double x, double y) {
 		super();
 		this.x = x;
 		this.y = y;
 	}
-	public int getX() {
+	public double getX() {
 		return x;
 	}
-	public void setX(int x) {
+	public void setX(double x) {
 		this.x = x;
 	}
-	public int getY() {
+	public double getY() {
 		return y;
 	}
-	public void setY(int y) {
+	public void setY(double y) {
 		this.y = y;
 	}
 	@Override
@@ -36,7 +36,7 @@ public class Coordinates {
  
     public static int orientation(Coordinates p, Coordinates q, Coordinates r)
     {
-        int val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+        double val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
  
         if (val == 0)
             return 0;

@@ -91,7 +91,7 @@ public class DSData {
 	}
 	
 	public boolean isAmbiguous() {
-		return match;
+		return !match;
 	}
 	
 	public Coordinates getFaultcoordinates() {

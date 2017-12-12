@@ -19,7 +19,7 @@ public class T2Fault extends Fault{
 		Coordinates p[] = new Coordinates[len()];
 		p[0] = new Coordinates(1,-32);
 		p[1] = new Coordinates(-6,-4);
-		p[2] = new Coordinates(-22,-32);
+		p[2] = new Coordinates(-22.5,-32);
 		
 		super.points = p;
 	}

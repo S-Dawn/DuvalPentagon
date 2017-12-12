@@ -3,6 +3,8 @@ package com.duval.userinterface;
 import java.util.Scanner;
 
 import com.duval.utils.Controller;
+import com.duval.utils.Coordinates;
+import com.duval.utils.FaultController;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
@@ -41,7 +43,19 @@ public class Main {
 			case 6:
 				System.out.println("Fault Points Count Detected: " + p.countFaultPoints());
 				break;
+			
+			case 7:
+				System.out.println("Enter Fault: ");
+				String name = sc.next();
+				p.displayFault(name);
+				break;
 
+			case 8:
+				FaultController co = new FaultController();
+				Coordinates coo = co.getFaultPoints(32930, 157, 2397, 0, 0);
+				System.out.println(coo);
+				break;
+				
 			default:
 				showMenu();
 				break;
@@ -59,6 +73,8 @@ public class Main {
 		System.out.println("4: Display Ok Points");
 		System.out.println("5: Display Pentagon");
 		System.out.println("6: Count Fault Points");
+		System.out.println("7: Show Faults");
+		System.out.println("8: Calculate Centroid");
 
 	}
 }
