@@ -54,7 +54,7 @@ public abstract class Fault {
 	public boolean isFault(Coordinates p) {
 		return Coordinates.isInside(points, len(), p);
 	}
-	public boolean isFault(int x, int y) {
+	public boolean isFault(double x, double y) {
 		Coordinates p = new Coordinates(x, y);
 		return Coordinates.isInside(points, len(), p);
 	}

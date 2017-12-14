@@ -52,7 +52,7 @@ public class Main {
 
 			case 8:
 				FaultController co = new FaultController();
-				Coordinates coo = co.getFaultPoints(32930, 157, 2397, 0, 0);
+				Coordinates coo = co.getFaultPoints(31, 130, 192, 31, 0);
 				System.out.println(coo);
 				break;
 				
