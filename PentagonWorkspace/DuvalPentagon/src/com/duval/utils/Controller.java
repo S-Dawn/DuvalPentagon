@@ -53,7 +53,7 @@ public class Controller {
 		while(itr.hasNext()) {
 			obj = itr.next();
 			p = fc.getFaultPoints(obj);
-			canvas.addNewElement(p, obj.getPredictedFault());
+			canvas.addNewElement(p, obj.getFault());
 		}
 	}
 	
