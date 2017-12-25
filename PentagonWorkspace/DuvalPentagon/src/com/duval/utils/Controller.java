@@ -98,7 +98,7 @@ public class Controller {
 		Coordinates p = fc.getFaultPoints(obj);
 		Coordinates coor[] = fc.getPentagonCoordinate();
 		canvas.addNewElement(p, obj.getPredictedFault());
-		canvas.drawpentagon(coor, obj.isAmbiguous());
+		canvas.drawpentagon(coor, !obj.isAmbiguous());
 	}
 	
 	public int countFaultPoints() {

@@ -72,10 +72,12 @@ public class DSData {
 
 	public void setFault(String fault) {
 		Fault = fault;
-		if(Fault.equals(PredictedFault))
-			match = true;
-		else
-			match = false;
+		String [] faultarr = Fault.split("/");
+		match = false;
+		for(int i=0; i<faultarr.length;i++) {
+			if(faultarr[i].equals(PredictedFault))
+				match = true;
+		}
 	}
 
 	public String getPredictedFault() {
@@ -84,10 +86,12 @@ public class DSData {
 
 	public void setPredictedFault(String predictedFault) {
 		PredictedFault = predictedFault;
-		if(PredictedFault.equals(Fault))
-			match = true;
-		else
-			match = false;
+		String [] faultarr = Fault.split("/");
+		match = false;
+		for(int i=0; i<faultarr.length;i++) {
+			if(faultarr[i].equals(PredictedFault))
+				match = true;
+		}
 	}
 	
 	public boolean isAmbiguous() {

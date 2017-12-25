@@ -80,10 +80,10 @@ public class DSController {
 		Iterator rows = sheet.rowIterator();
 		Iterator cells;
 
-		rows.next();
+		//rows.next();
 		DSData obj = new DSData();
 
-		for (int i = 0; i < rowNumber && rows.hasNext(); i++, rows.next());
+		for (int i = 1; i < rowNumber && rows.hasNext(); i++, rows.next());
 		
 		row = (XSSFRow) rows.next();
 		cells = row.cellIterator();
