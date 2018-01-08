@@ -121,14 +121,18 @@ public class Painter {
             drawNode(p,g);
         }
         else if (fault.equals("T3")) {
-            g.setColor(Color.CYAN);
-            drawNode(p,g);
-        }
-        else if (fault.equals("T2")) {
             g.setColor(Color.GREEN);
             drawNode(p,g);
         }
+        else if (fault.equals("T2")) {
+            g.setColor(Color.PINK);
+            drawNode(p,g);
+        }
         else if (fault.equals("T1")) {
+            g.setColor(Color.PINK);
+            drawNode(p,g);
+        }
+        else if (fault.equals("T1/T2")||fault.equals("T2/T1")) {
             g.setColor(Color.PINK);
             drawNode(p,g);
         }
