@@ -39,6 +39,7 @@
 <fullyQualifiedTypeName name="javax.swing.JButton"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 <fullyQualifiedTypeName name="com.duval.utils.Controller"/>
-<fullyQualifiedTypeName name="com.duval.utils.Coordinates"/>
 <fullyQualifiedTypeName name="com.duval.utils.FaultController"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="com.duval.utils.Coordinates"/>
 </qualifiedTypeNameHistroy>

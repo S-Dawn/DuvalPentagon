@@ -55,6 +55,15 @@ public class Main {
 				Coordinates coo = co.getFaultPoints(31, 130, 192, 31, 0);
 				System.out.println(coo);
 				break;
+			
+			case 9:
+				System.out.println("Enter Coordinates: ");
+				int x = Integer.parseInt(sc.next());
+				int y = Integer.parseInt(sc.next());
+				Coordinates co1 = new Coordinates(x, y);
+				p.plotCoordinate(co1);	
+				System.out.println("Point (" + x+ ", "+ y + ") plotted");
+				break;
 				
 			default:
 				showMenu();
@@ -75,6 +84,7 @@ public class Main {
 		System.out.println("6: Count Fault Points");
 		System.out.println("7: Show Faults");
 		System.out.println("8: Calculate Centroid");
+		System.out.println("9: Plot Coordinate");
 
 	}
 }

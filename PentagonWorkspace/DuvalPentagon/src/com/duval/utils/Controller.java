@@ -81,6 +81,10 @@ public class Controller {
 		}
 	}
 	
+	public void plotCoordinate(Coordinates co) {
+		canvas.addNewElement(co, true);
+	}
+	
 	public void displayFault(String fault) {
 		Iterator<DSData> itr  = dataset.iterator();
 		DSData obj;
