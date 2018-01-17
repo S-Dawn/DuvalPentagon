@@ -1,0 +1,12 @@
+package com.duval.datasource;
+
+import com.duval.utils.Coordinates;
+
+public interface GenData {
+	
+	public void getCoordinate();
+	
+	public void setCoordinate(Coordinates coor);
+	
+
+}

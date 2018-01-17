@@ -1,0 +1,10 @@
+package com.duval.datasource;
+
+public class DSDataMOD {
+	
+	private String Fault;
+	private Coordinates coor;
+	
+	
+
+}

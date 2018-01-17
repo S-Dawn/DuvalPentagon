@@ -2,7 +2,7 @@ package com.duval.datasource;
 
 import com.duval.utils.Coordinates;
 
-public class DSData {
+public class DSData implements GenData{
 
 	double H2, C2H6, CH4, C2H4, C2H2;
 	
@@ -111,6 +111,16 @@ public class DSData {
 	public String toString() {
 		return "DSData [H2=" + H2 + ", C2H6=" + C2H6 + ", CH4=" + CH4 + ", C2H4=" + C2H4 + ", C2H2=" + C2H2 + ", Fault="
 				+ Fault + "]";
+	}
+
+	@Override
+	public Coordinates getCoordinates() {
+		return getFaultcoordinates();
+	}
+
+	@Override
+	public void setCoordinates(Coordinates coor) {
+		setFaultcoordinates(coor);		
 	}
 	
 }

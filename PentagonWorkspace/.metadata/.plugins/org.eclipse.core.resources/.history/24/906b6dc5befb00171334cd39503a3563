@@ -1,0 +1,8 @@
+package com.duval.datasource;
+
+public interface GenData {
+	
+	public void getCoordinate();
+	
+
+}

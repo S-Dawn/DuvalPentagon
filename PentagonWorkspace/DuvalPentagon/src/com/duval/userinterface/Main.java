@@ -62,7 +62,7 @@ public class Main {
 				int y = Integer.parseInt(sc.next());
 				Coordinates co1 = new Coordinates(x, y);
 				p.plotCoordinate(co1);	
-				System.out.println("Point (" + x+ ", "+ y + ") plotted");
+				System.out.println("Point (" + x + ", " + y + ") plotted");
 				break;
 				
 			default:

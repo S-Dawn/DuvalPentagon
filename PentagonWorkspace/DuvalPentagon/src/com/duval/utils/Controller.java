@@ -5,12 +5,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.duval.datasource.DSController;
+import com.duval.datasource.DSControllerMOD;
 import com.duval.datasource.DSData;
 
 public class Controller {
 
-	private FaultController fc;;
+	private FaultController fc;
 	private DSController dc, dc1;
+	private DSControllerMOD dcpatch;
 	
 	private List<DSData> dataset;
 	private Painter canvas;
@@ -26,7 +28,8 @@ public class Controller {
 		this.dataset = dc.readDS();
 		newfileName = fileName + "_MOD.xlsx";
 		this.dc1 = new DSController(newfileName);
-		
+		newfileName = fileName + " PATCH.xlsx";
+		this.dcpatch = new DSControllerMOD(newfileName);
 	}
 	
 	public void predictFaults() throws Exception {

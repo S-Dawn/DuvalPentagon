@@ -41,5 +41,7 @@
 <fullyQualifiedTypeName name="com.duval.utils.Controller"/>
 <fullyQualifiedTypeName name="com.duval.utils.FaultController"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="com.duval.datasource.GenData"/>
 <fullyQualifiedTypeName name="com.duval.utils.Coordinates"/>
+<fullyQualifiedTypeName name="com.duval.datasource.DSControllerMOD"/>
 </qualifiedTypeNameHistroy>
