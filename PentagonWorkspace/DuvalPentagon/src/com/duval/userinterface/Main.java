@@ -9,10 +9,28 @@ import com.duval.utils.FaultController;
 public class Main {
 	public static void main(String[] args) throws Exception {
 
-		Controller p = new Controller("G:\\2nd Lab\\DGA DATASET EXCCEL");
-		p.predictFaults();
-
+		boolean patch = false;
 		Scanner sc = new Scanner(System.in);
+
+		while (true) {
+			System.out.println("Do you want to Enable Patch ? (Y/N)");
+			String choice = sc.next();
+			
+			if(choice.toUpperCase().equals("Y")) {
+				patch = true;
+				break;
+			}
+			else if(choice.toUpperCase().equals("N")) {
+				patch = false;
+				break;
+			}
+			else {
+				System.out.println("Enter a valid Choice.");
+			}
+		}
+
+		Controller p = new Controller("G:\\2nd Lab\\DGA DATASET EXCCEL", patch);
+		p.predictFaults();
 
 		int choice = 1;
 		showMenu();
@@ -39,11 +57,11 @@ public class Main {
 				int row = sc.nextInt();
 				p.displayPentagon(row);
 				break;
-				
+
 			case 6:
 				System.out.println("Fault Points Count Detected: " + p.countFaultPoints());
 				break;
-			
+
 			case 7:
 				System.out.println("Enter Fault: ");
 				String name = sc.next();
@@ -52,19 +70,19 @@ public class Main {
 
 			case 8:
 				FaultController co = new FaultController();
-				Coordinates coo = co.getFaultPoints(31, 130, 192, 31, 0);
+				Coordinates coo = co.getFaultPointCentroid(31, 130, 192, 31, 0);
 				System.out.println(coo);
 				break;
-			
+
 			case 9:
 				System.out.println("Enter Coordinates: ");
 				int x = Integer.parseInt(sc.next());
 				int y = Integer.parseInt(sc.next());
 				Coordinates co1 = new Coordinates(x, y);
-				p.plotCoordinate(co1);	
+				p.plotCoordinate(co1);
 				System.out.println("Point (" + x + ", " + y + ") plotted");
 				break;
-				
+
 			default:
 				showMenu();
 				break;

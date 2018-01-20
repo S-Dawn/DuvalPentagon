@@ -12,6 +12,12 @@ public interface GenData {
 	
 	public void setFault(String fault);	
 	
+	public String getPredictedFault();
+	
+	public void setPredictedFault(String predictedFault);
+	
 	public String toString();
+	
+	public boolean isAmbiguous();
 
 }

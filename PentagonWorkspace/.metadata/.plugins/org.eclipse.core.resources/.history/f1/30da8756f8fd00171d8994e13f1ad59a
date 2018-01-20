@@ -1,0 +1,67 @@
+package com.duval.datasource;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.duval.utils.Coordinates;
+
+public class DSControllerPatch {
+
+	String fileURL;
+
+	public DSControllerPatch(String fileURL) {
+		super();
+		this.fileURL = fileURL;
+	}
+
+	public List<DSDataPatch> readDS() throws IOException {
+		InputStream ExcelFileToRead = new FileInputStream(fileURL);
+		XSSFWorkbook wb = new XSSFWorkbook(ExcelFileToRead);
+		XSSFSheet sheet = wb.getSheetAt(0);
+		XSSFRow row;
+		XSSFCell cell;
+
+		Iterator rows = sheet.rowIterator();
+		Iterator cells;
+
+		rows.next();
+
+		List<DSDataPatch> list = new ArrayList<DSDataPatch>();
+		GenData obj = null;
+		double x, y;
+
+		while (rows.hasNext()) {
+
+			obj = new DSDataPatch();
+
+			row = (XSSFRow) rows.next();
+			cells = row.cellIterator();
+
+			cell = (XSSFCell) cells.next();
+			x = (cell.getNumericCellValue());
+
+			cell = (XSSFCell) cells.next();
+			y = (cell.getNumericCellValue());
+
+			obj.setCoordinates(new Coordinates(x, y));
+			
+			cell = (XSSFCell) cells.next();
+			obj.setFault(cell.getStringCellValue());
+
+			list.add(obj);
+
+		}
+
+		return list;
+	}	
+}

@@ -1,0 +1,61 @@
+package com.duval.datasource;
+
+import com.duval.utils.Coordinates;
+
+public class DSDataPatch implements GenData{
+	
+	private String Fault, predictedFault;
+	private Coordinates coor;
+	
+	public DSDataPatch() {
+		super();
+	}
+
+	public DSDataPatch(String fault, Coordinates coor) {
+		super();
+		Fault = fault;
+		this.coor = coor;
+	}
+
+	public String getFault() {
+		return Fault;
+	}
+
+	public void setFault(String fault) {
+		Fault = fault;
+	}
+
+	public Coordinates getCoordinates() {
+		return coor;
+	}
+
+	public void setCoordinates(Coordinates coor) {
+		this.coor = coor;
+	}
+
+	@Override
+	public String toString() {
+		return "DSDataMOD [Fault=" + Fault + ", coor=" + coor + "]";
+	}
+
+	@Override
+	public String getPredictedFault() {
+		// TODO Auto-generated method stub
+		return this.predictedFault;
+	}
+
+	@Override
+	public void setPredictedFault(String predictedFault) {
+		// TODO Auto-generated method stub
+		this.predictedFault = predictedFault;
+	}
+
+	@Override
+	public boolean isAmbiguous() {
+		if(Fault.equals(predictedFault))
+			return false;
+		else
+			return true;
+	}
+
+}

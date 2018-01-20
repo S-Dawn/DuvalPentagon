@@ -1,0 +1,168 @@
+package com.duval.utils;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+
+import com.duval.datasource.DSController;
+import com.duval.datasource.DSControllerPatch;
+import com.duval.datasource.DSData;
+import com.duval.datasource.DSDataPatch;
+import com.duval.datasource.GenData;
+
+public class Controller {
+
+	private FaultController fc;
+	private DSController dc, dc1;
+	private DSControllerPatch dcpatch;
+
+	private List<DSData> dataset;
+	private List<DSDataPatch> datasetPatch;
+	private Painter canvas;
+
+	private boolean enablePatch;
+
+	public Controller(String fileName, boolean enablePatch) throws Exception {
+		this.enablePatch = enablePatch;
+		init(fileName);
+	}
+
+	public void init(String fileName) throws Exception {
+		String newfileName = fileName + ".xlsx";
+		this.fc = new FaultController();
+		this.dc = new DSController(newfileName);
+		this.dataset = dc.readDS();
+		newfileName = fileName + "_MOD.xlsx";
+		this.dc1 = new DSController(newfileName);
+		if (enablePatch) {
+			newfileName = fileName + " PATCH.xlsx";
+			this.dcpatch = new DSControllerPatch(newfileName);
+		}
+	}
+
+	public void predictFaults() throws Exception {
+		Coordinates p;
+		DSData data;
+		DSDataPatch dataPatch;
+		Detector obj = new Detector(400, 200);
+		for (int i = 0; i < dataset.size(); i++) {
+			data = dataset.get(i);
+			p = fc.getFaultPointCentroid(data);
+			data.setPredictedFault(obj.FaultType(p));
+			data.setFaultcoordinates(p);
+		}
+		dc1.writeDS(dataset);
+		if(enablePatch) {
+			for (int i = 0; i < datasetPatch.size(); i++) {
+				dataPatch = datasetPatch.get(i);
+				p = dataPatch.getCoordinates();
+				dataPatch.setPredictedFault(obj.FaultType(p));
+			}
+		}
+	}
+
+	public void createCanvas() throws Exception {
+		this.canvas = new Painter(800, 600, 3);
+		canvas.show();
+	}
+
+	public void plotpoints() {
+		Iterator<DSData> itr = dataset.iterator();
+		DSData obj;
+		Coordinates p;
+		while (itr.hasNext()) {
+			obj = itr.next();
+			p = obj.getCoordinates();
+			canvas.addNewElement(p, obj.getFault());
+		}
+		if(enablePatch) {
+			Iterator<DSDataPatch> itrPatch = datasetPatch.iterator();
+			DSDataPatch objPatch;
+			Coordinates coor;
+			while (itrPatch.hasNext()) {
+				objPatch = itrPatch.next();
+				p = objPatch.getCoordinates();
+				canvas.addNewElement(p, objPatch.getFault());
+			}
+		}
+	}
+
+	public void displayFaultpoints() {
+		Iterator<DSData> itr = dataset.iterator();
+		DSData obj;
+		Coordinates p;
+		while (itr.hasNext()) {
+			obj = itr.next();
+			p = obj.getCoordinates();
+			if (obj.isAmbiguous())
+				canvas.addNewElement(p, obj.getFault());
+		}
+		if(enablePatch) {
+			Iterator<DSDataPatch> itrPatch = datasetPatch.iterator();
+			DSDataPatch objPatch;
+			while (itrPatch.hasNext()) {
+				objPatch = itrPatch.next();
+				p = objPatch.getCoordinates();
+				if (objPatch.isAmbiguous())
+					canvas.addNewElement(p, objPatch.getFault());
+			}
+		}
+	}
+
+	public void displayOkpoints() {
+		Iterator<DSData> itr = dataset.iterator();
+		DSData obj;
+		Coordinates p;
+		while (itr.hasNext()) {
+			obj = itr.next();
+			p = obj.getFaultcoordinates();
+			if (!obj.isAmbiguous())
+				canvas.addNewElement(p, obj.getFault());
+		}
+		if(enablePatch) {
+			Iterator<DSDataPatch> itrPatch = datasetPatch.iterator();
+			DSDataPatch objPatch;
+			while (itrPatch.hasNext()) {
+				objPatch = itrPatch.next();
+				p = objPa.getFaultcoordinates();
+					canvas.addNewElement(p, obj.getFault());
+			}
+		}
+	}
+
+	public void plotCoordinate(Coordinates co) {
+		canvas.addNewElement(co, true);
+	}
+
+	public void displayFault(String fault) {
+		Iterator<DSData> itr = dataset.iterator();
+		DSData obj;
+		Coordinates p;
+		while (itr.hasNext()) {
+			obj = itr.next();
+			p = obj.getFaultcoordinates();
+			if (fault.equals(obj.getFault()))
+				canvas.addNewElement(p, obj.getFault());
+		}
+	}
+
+	public void displayPentagon(int row) throws IOException {
+		DSData obj = dc1.readRow(row);
+		Coordinates p = fc.getFaultPointCentroid(obj);
+		Coordinates coor[] = fc.getPentagonCoordinate();
+		canvas.addNewElement(p, obj.getPredictedFault());
+		canvas.drawpentagon(coor, !obj.isAmbiguous());
+	}
+
+	public int countFaultPoints() {
+		int i = 0;
+		int count = 0;
+		DSData obj = null;
+		for (i = 0, count = 0; i < dataset.size(); i++) {
+			obj = dataset.get(i);
+			if (obj.isAmbiguous())
+				count++;
+		}
+		return count;
+	}
+}

@@ -12,12 +12,12 @@ public class FaultController {
 	
 	Coordinates centroid;
 	
-	public Coordinates getFaultPoints(double a, double b, double c, double d, double e){
+	public Coordinates getFaultPointCentroid(double a, double b, double c, double d, double e){
 		init(a, b, c, d, e);
 		return getCentroid();
 	}
 	
-	public Coordinates getFaultPoints(DSData obj){
+	public Coordinates getFaultPointCentroid(DSData obj){
 		this.a = obj.getH2();
 		this.b = obj.getC2H6();
 		this.c = obj.getCH4();
