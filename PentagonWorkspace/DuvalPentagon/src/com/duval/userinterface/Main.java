@@ -2,6 +2,7 @@ package com.duval.userinterface;
 
 import java.util.Scanner;
 
+import com.duval.custom.Cluster;
 import com.duval.utils.Controller;
 import com.duval.utils.Coordinates;
 import com.duval.utils.FaultController;
@@ -82,6 +83,21 @@ public class Main {
 				p.plotCoordinate(co1);
 				System.out.println("Point (" + x + ", " + y + ") plotted");
 				break;
+				
+			case 10:
+				Cluster gear = new Cluster();
+				gear.appendList(p.getDataset());
+				gear.appendListPatch(p.getDatasetPatch());
+				gear.startClustering();
+				int Map[][] = gear.getMap();
+				for(int m1=0; m1<76; m1++) {
+					for(int m2=0; m2<73; m2++) {
+						System.out.print(Map[m1][m2]);
+					}
+					System.out.println();
+				}
+				p.plotMap(Map);
+				break;
 
 			default:
 				showMenu();
@@ -103,6 +119,7 @@ public class Main {
 		System.out.println("7: Show Faults");
 		System.out.println("8: Calculate Centroid");
 		System.out.println("9: Plot Coordinate");
+		System.out.println("10: Start Clustering");
 
 	}
 }

@@ -22,6 +22,14 @@ public class Controller {
 
 	private boolean enablePatch;
 
+	public List<DSData> getDataset() {
+		return dataset;
+	}
+
+	public List<DSDataPatch> getDatasetPatch() {
+		return datasetPatch;
+	}
+
 	public Controller(String fileName, boolean enablePatch) throws Exception {
 		this.enablePatch = enablePatch;
 		init(fileName);
@@ -84,6 +92,39 @@ public class Controller {
 				objPatch = itrPatch.next();
 				p = objPatch.getCoordinates();
 				canvas.addNewElement(p, objPatch.getFault());
+			}
+		}
+	}
+	
+	public void plotMap(int Map[][]) {
+		Coordinates p;
+		for(int i=0; i<76;i++) {
+			for(int j=0; j<73; j++) {
+				p = new Coordinates(i,j);
+				switch(Map[i][j]) {
+				case 1:
+					canvas.addNewElement(p, "PD");
+					break;
+				case 2:
+					canvas.addNewElement(p, "D1");
+					break;
+				case 3:
+					canvas.addNewElement(p, "D2");
+					break;
+				case 4:
+					canvas.addNewElement(p, "S");
+					break;
+				case 5:
+					canvas.addNewElement(p, "T1");
+					break;
+				case 6:
+					canvas.addNewElement(p, "T2");
+					break;
+				case 7:
+					canvas.addNewElement(p, "T3");
+					break;
+					
+				}
 			}
 		}
 	}
@@ -175,4 +216,6 @@ public class Controller {
 		}
 		return count;
 	}
+	
+	
 }
