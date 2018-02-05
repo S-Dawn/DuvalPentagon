@@ -90,12 +90,12 @@ public class Main {
 				gear.appendListPatch(p.getDatasetPatch());
 				gear.startClustering();
 				int Map[][] = gear.getMap();
-				for(int m1=0; m1<76; m1++) {
-					for(int m2=0; m2<73; m2++) {
-						System.out.print(Map[m1][m2]);
-					}
-					System.out.println();
-				}
+//				for(int m1=0; m1<800; m1++) {
+//					for(int m2=0; m2<600; m2++) {
+//						System.out.print(Map[m1][m2]);
+//					}
+//					System.out.println();
+//				}
 				p.plotMap(Map);
 				break;
 

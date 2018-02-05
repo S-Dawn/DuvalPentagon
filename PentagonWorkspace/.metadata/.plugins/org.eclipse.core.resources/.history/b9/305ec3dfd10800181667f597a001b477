@@ -1,0 +1,9 @@
+package com.duval.custom;
+
+public class Test {
+public static void main(String[] args) {
+	String test[]= new String [10];
+	
+	System.out.println(test[0]);
+}
+}

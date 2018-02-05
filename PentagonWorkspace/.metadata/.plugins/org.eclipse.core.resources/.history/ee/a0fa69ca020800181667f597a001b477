@@ -1,0 +1,18 @@
+package com.duval.custom;
+
+import com.duval.utils.Coordinates;
+
+public class ClusterUnit {
+	
+	Coordinates coord;
+	String originalFault;
+	
+	public ClusterUnit() {
+		super();
+	}
+	
+	
+	
+	
+
+}

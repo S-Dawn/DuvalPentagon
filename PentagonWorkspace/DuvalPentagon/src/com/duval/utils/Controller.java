@@ -98,30 +98,30 @@ public class Controller {
 	
 	public void plotMap(int Map[][]) {
 		Coordinates p;
-		for(int i=0; i<76;i++) {
-			for(int j=0; j<73; j++) {
+		for(int i=0; i<800;i++) {
+			for(int j=0; j<600; j++) {
 				p = new Coordinates(i,j);
 				switch(Map[i][j]) {
 				case 1:
-					canvas.addNewElement(p, "PD");
+					canvas.addNewElementDirect(p, "PD");
 					break;
 				case 2:
-					canvas.addNewElement(p, "D1");
+					canvas.addNewElementDirect(p, "D1");
 					break;
 				case 3:
-					canvas.addNewElement(p, "D2");
+					canvas.addNewElementDirect(p, "D2");
 					break;
 				case 4:
-					canvas.addNewElement(p, "S");
+					canvas.addNewElementDirect(p, "S");
 					break;
 				case 5:
-					canvas.addNewElement(p, "T1");
+					canvas.addNewElementDirect(p, "T1");
 					break;
 				case 6:
-					canvas.addNewElement(p, "T2");
+					canvas.addNewElementDirect(p, "T2");
 					break;
 				case 7:
-					canvas.addNewElement(p, "T3");
+					canvas.addNewElementDirect(p, "T3");
 					break;
 					
 				}

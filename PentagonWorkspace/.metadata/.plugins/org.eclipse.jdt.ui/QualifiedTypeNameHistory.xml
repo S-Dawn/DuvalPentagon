@@ -16,8 +16,6 @@
 <fullyQualifiedTypeName name="com.duval.components.Fault"/>
 <fullyQualifiedTypeName name="com.duval.datasource.Data"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="com.duval.utils.Detector"/>
 <fullyQualifiedTypeName name="javax.swing.JLabel"/>
 <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
@@ -31,7 +29,6 @@
 <fullyQualifiedTypeName name="javax.swing.JFrame"/>
 <fullyQualifiedTypeName name="java.util.Iterator"/>
 <fullyQualifiedTypeName name="com.duval.datasource.DSController"/>
-<fullyQualifiedTypeName name="com.duval.datasource.DSData"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="java.lang.ExceptionInInitializerError"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
@@ -42,8 +39,13 @@
 <fullyQualifiedTypeName name="com.duval.utils.FaultController"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
 <fullyQualifiedTypeName name="com.duval.datasource.DSControllerMOD"/>
-<fullyQualifiedTypeName name="com.duval.datasource.GenData"/>
-<fullyQualifiedTypeName name="com.duval.utils.Coordinates"/>
 <fullyQualifiedTypeName name="com.duval.datasource.DSDataCoord"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="com.duval.datasource.GenData"/>
+<fullyQualifiedTypeName name="com.duval.datasource.DSData"/>
 <fullyQualifiedTypeName name="com.duval.datasource.DSDataPatch"/>
+<fullyQualifiedTypeName name="com.duval.custom.Cluster"/>
+<fullyQualifiedTypeName name="com.duval.custom.ClusterUnit"/>
+<fullyQualifiedTypeName name="com.duval.utils.Coordinates"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 </qualifiedTypeNameHistroy>

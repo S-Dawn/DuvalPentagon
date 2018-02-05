@@ -148,6 +148,49 @@ public class Painter {
         view.repaint();
     }
     
+    public void addNewElementDirect(Coordinates p, String fault) {
+    	Graphics g = surface.getGraphics();
+        if (fault.equals("PD")) {
+            g.setColor(Color.YELLOW);
+            drawDirectNode(p,g);
+        }
+        else if (fault.equals("D1")) {
+            g.setColor(Color.BLUE);
+            drawDirectNode(p,g);
+        }
+        else if (fault.equals("D2")) {
+            g.setColor(Color.RED);
+            drawDirectNode(p,g);
+        }
+        else if (fault.equals("T3")) {
+            g.setColor(Color.GREEN);
+            drawDirectNode(p,g);
+        }
+        else if (fault.equals("T2")) {
+            g.setColor(Color.PINK);
+            drawDirectNode(p,g);
+        }
+        else if (fault.equals("T1")) {
+            g.setColor(Color.PINK);
+            drawDirectNode(p,g);
+        }
+        else if (fault.equals("T1/T2")||fault.equals("T2/T1")) {
+            g.setColor(Color.PINK);
+            drawDirectNode(p,g);
+        }
+        else if (fault.equals("S")) {
+            g.setColor(Color.ORANGE);
+            drawDirectNode(p,g);
+        }
+        else {
+        	g.setColor(Color.BLACK);
+        	drawDirectNode(p,g);
+        }
+        g.dispose();
+        view.repaint();
+    }
+    
+    
     public void initButtons() {
     	resetCanvas = new JButton("Reset Canvas");
     	plotpoints = new JButton("Plot Points");
@@ -195,6 +238,15 @@ public class Painter {
             g.fillOval(xLoc, yLoc, scale, scale);
             g.drawOval(xLoc, yLoc, scale, scale);
     }
+    
+    public void drawDirectNode(Coordinates p, Graphics g)    {
+        int xLoc = (int) (p.getX());
+        int yLoc = (int) (p.getY());
+        g.fillOval(xLoc, yLoc, scale, scale);
+        g.drawOval(xLoc, yLoc, scale, scale);
+}
+    
+    
     
     public void drawpentagon(Coordinates coor[], boolean flag) {
     	Polygon p = new Polygon();

@@ -1,0 +1,229 @@
+package com.duval.custom;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.duval.datasource.DSData;
+import com.duval.datasource.DSDataPatch;
+import com.duval.datasource.GenData;
+import com.duval.utils.Coordinates;
+
+public class Cluster {
+
+	private List<ClusterUnit> dataset;
+	private int xorigin = 400, yorigin = 200, scale = 3;
+	int m = 800,n =600;
+	private int Map[][] = new int[m][n];
+	private String ClusterNames[] = new String[8];
+	private Coordinates centroid[] = new Coordinates[8];
+
+	private List<Coordinates> PDCluster = new ArrayList<>();
+	private List<Coordinates> D1Cluster = new ArrayList<>();
+	private List<Coordinates> D2Cluster = new ArrayList<>();
+	private List<Coordinates> SCluster = new ArrayList<>();
+	private List<Coordinates> T1Cluster = new ArrayList<>();
+	private List<Coordinates> T2Cluster = new ArrayList<>();
+	private List<Coordinates> T3Cluster = new ArrayList<>();
+
+	public Cluster() {
+		super();
+		dataset = new ArrayList<ClusterUnit>();
+	}
+
+	public void appendList(List<DSData> list) {
+		ClusterUnit unit;
+		for (GenData obj : list) {
+			unit = new ClusterUnit(obj.getCoordinates(), obj.getFault());
+			this.dataset.add(unit);
+		}
+	}
+
+	public void appendListPatch(List<DSDataPatch> list) {
+		ClusterUnit unit;
+		for (GenData obj : list) {
+			unit = new ClusterUnit(obj.getCoordinates(), obj.getFault());
+			this.dataset.add(unit);
+		}
+	}
+
+	private void init() {
+		ClusterNames[0] = "Unassigned";
+		ClusterNames[1] = "PD";
+		ClusterNames[2] = "D1";
+		ClusterNames[3] = "D2";
+		ClusterNames[4] = "S";
+		ClusterNames[5] = "T1";
+		ClusterNames[6] = "T2";
+		ClusterNames[7] = "T3";
+
+		centroid[1] = assignCentroid("PD");
+		centroid[2] = assignCentroid("D1");
+		centroid[3] = assignCentroid("D2");
+		centroid[4] = assignCentroid("S");
+		centroid[5] = assignCentroid("T1");
+		centroid[6] = assignCentroid("T2");
+		centroid[7] = assignCentroid("T3");
+		
+		for(int i=0; i<dataset.size(); i++) {
+			System.out.println(dataset.get(i));
+		}
+		
+		System.out.println(dataset.size());
+
+	}
+
+	private Coordinates assignCentroid(String str) {
+		for (ClusterUnit obj : dataset) {
+			if (obj.getOriginalFault().equals(str)) {
+				return obj.getCoord();
+			}
+		}
+		return new Coordinates(Math.random(), Math.random());
+	}
+
+	public void startClustering() {
+		init();
+		Coordinates oldcentroid[] = new Coordinates[8];
+		oldcentroid[1] = assignCentroid("AnyName");
+		oldcentroid[2] = assignCentroid("AnyName");
+		oldcentroid[3] = assignCentroid("AnyName");
+		oldcentroid[4] = assignCentroid("AnyName");
+		oldcentroid[5] = assignCentroid("AnyName");
+		oldcentroid[6] = assignCentroid("AnyName");
+		oldcentroid[7] = assignCentroid("AnyName");
+
+		boolean flag = true;
+		do {
+//			displayCentroid();
+			if (Coordinates.isEqualArray(centroid, oldcentroid)) {
+				flag = false;
+			} else {
+				oldcentroid = Coordinates.copyArray(centroid);
+				updateCentroid();
+			}
+		} while (flag);
+		processMap();
+		displayCentroid();
+	}
+	
+	private void displayCentroid() {
+		for(int i=1; i<centroid.length; i++) {
+			System.out.print(centroid[i] + " ");
+		}
+		System.out.println();
+	}
+	
+	private void updateCentroid() {
+
+		PDCluster = new ArrayList<>();
+		D1Cluster = new ArrayList<>();
+		D2Cluster = new ArrayList<>();
+		SCluster = new ArrayList<>();
+		T1Cluster = new ArrayList<>();
+		T2Cluster = new ArrayList<>();
+		T3Cluster = new ArrayList<>();
+		
+		for (int i = 0; i < dataset.size(); i++) {
+//			System.out.println(assigntocluster(dataset.get(i).getCoord()));
+			
+			switch (assigntocluster(dataset.get(i).getCoord())) {
+			case 1:
+				PDCluster.add(dataset.get(i).getCoord());
+				break;
+
+			case 2:
+				D1Cluster.add(dataset.get(i).getCoord());
+				break;
+			case 3:
+				D2Cluster.add(dataset.get(i).getCoord());
+				break;
+			case 4:
+				SCluster.add(dataset.get(i).getCoord());
+				break;
+			case 5:
+				T1Cluster.add(dataset.get(i).getCoord());
+				break;
+			case 6:
+				T2Cluster.add(dataset.get(i).getCoord());
+				break;
+			case 7:
+				T3Cluster.add(dataset.get(i).getCoord());
+				break;
+			default:
+				break;
+			}
+
+		}
+		
+//		System.out.println(PDCluster);
+//		System.out.println(D1Cluster);
+//		System.out.println(D2Cluster);
+//		System.out.println(SCluster);
+//		System.out.println(T1Cluster);
+//		System.out.println(T2Cluster);
+//		System.out.println(T3Cluster);
+		
+		centroid[1] = calculateCentroid(PDCluster);
+		centroid[2] = calculateCentroid(D1Cluster);
+		centroid[3] = calculateCentroid(D2Cluster);
+		centroid[4] = calculateCentroid(SCluster);
+		centroid[5] = calculateCentroid(T1Cluster);
+		centroid[6] = calculateCentroid(T2Cluster);
+		centroid[7] = calculateCentroid(T3Cluster);
+		
+	}
+
+	private int assigntocluster(Coordinates coor) {
+		double min = 9999;
+		int clusterno = 0;
+		double dist;
+
+		for (int i = 1; i <= 7; i++) {
+			dist = Coordinates.distance(centroid[i], coor);
+			if (min > dist) {
+				min = dist;
+				clusterno = i;
+			}
+		}
+
+		return clusterno;
+	}
+
+	private Coordinates calculateCentroid(List<Coordinates> list) {
+		double x = 0, y = 0;
+
+		for (Coordinates obj : list) {
+			x += obj.getX();
+			y += obj.getY();
+		}
+
+		x = x / (double)list.size();
+		y = y / (double)list.size();
+
+		return new Coordinates(x, y);
+	}
+	
+	private void processMap() {
+		Coordinates polygon[] = {
+				new Coordinates(xorigin + 0 * scale, yorigin - 40 * scale),
+				new Coordinates(xorigin - 38 * scale, yorigin - 12.4 * scale),
+				new Coordinates(xorigin - 23.5 * scale, yorigin + 32.4 * scale),
+				new Coordinates(xorigin + 23.5 * scale, yorigin + 32.4 * scale),
+				new Coordinates(xorigin + 38 * scale, yorigin - 12.4 * scale)
+			};
+
+		Coordinates obj;
+		for(int i=0; i<800; i++) {
+			for (int j=0; j<600; j--) {
+				obj = new Coordinates(xorigin + i *scale , yorigin - j*scale);
+				if(Coordinates.isInside(polygon, 5, obj)) {
+					Map[i+38][40-j] = assigntocluster(obj);
+				}
+			}
+		}
+	}
+
+	public int[][] getMap() {
+		return Map;
+	}
+}
