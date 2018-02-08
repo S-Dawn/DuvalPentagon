@@ -11,7 +11,7 @@ import com.duval.utils.Coordinates;
 public class Cluster {
 
 	private List<ClusterUnit> dataset;
-	private int xorigin = 400, yorigin = 200, scale = 3;
+	private int xorigin = 400, yorigin = 300, scale = 3;
 	int m = 800,n =600;
 	private int Map[][] = new int[m][n];
 	private String ClusterNames[] = new String[8];
@@ -64,11 +64,11 @@ public class Cluster {
 		centroid[6] = assignCentroid("T2");
 		centroid[7] = assignCentroid("T3");
 		
-		for(int i=0; i<dataset.size(); i++) {
-			System.out.println(dataset.get(i));
-		}
-		
-		System.out.println(dataset.size());
+//		for(int i=0; i<dataset.size(); i++) {
+//			System.out.println(dataset.get(i));
+//		}
+//		
+//		System.out.println(dataset.size());
 
 	}
 
@@ -217,6 +217,7 @@ public class Cluster {
 			for (int j=0; j<n; j++) {
 				obj = new Coordinates(i, j);
 				if(Coordinates.isInside(polygon, 5, obj)) {
+					obj = new Coordinates(i-xorigin, yorigin-j);
 					Map[i][j] = assigntocluster(obj);
 				}
 			}
