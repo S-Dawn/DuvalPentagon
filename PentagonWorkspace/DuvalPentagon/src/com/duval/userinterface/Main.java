@@ -30,7 +30,8 @@ public class Main {
 			}
 		}
 
-		Controller p = new Controller("G:\\2nd Lab\\DGA DATASET EXCCEL", patch);
+		//Controller p = new Controller("G:\\2nd Lab\\DGA DATASET EXCCEL", patch);
+		Controller p = new Controller("D:\\2nd Lab\\PentagonWorkspace\\DGA DATASET EXCCEL", patch);
 		p.predictFaults();
 
 		int choice = 1;
@@ -87,7 +88,8 @@ public class Main {
 			case 10:
 				Cluster gear = new Cluster();
 				gear.appendList(p.getDataset());
-				gear.appendListPatch(p.getDatasetPatch());
+				if(patch)
+					gear.appendListPatch(p.getDatasetPatch());
 				gear.startClustering();
 				int Map[][] = gear.getMap();
 //				for(int m1=0; m1<800; m1++) {
