@@ -245,10 +245,12 @@ public class Painter {
 		Polygon p = new Polygon();
 		Graphics g = surface.getGraphics();
 		g.setColor(col);
-		for(java.awt.Point pd:list)
-			System.out.println(pd.toString());
-		System.out.println();
+//		for(java.awt.Point pd:list)
+//			System.out.println(pd.toString());
+//		System.out.println();
 		for (Point point : list) {
+			System.out.println(point);
+			System.out.println(point.getX());
 			p.addPoint((int) (xorigin + point.getX() * scale), (int) (yorigin - point.getY() * scale));
 		}
 		g.drawPolygon(p);
