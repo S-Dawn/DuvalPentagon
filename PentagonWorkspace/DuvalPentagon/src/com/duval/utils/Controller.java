@@ -1,6 +1,9 @@
 package com.duval.utils;
 
+import java.awt.Color;
+import java.awt.Point;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -194,7 +197,14 @@ public class Controller {
 		Coordinates p = fc.getFaultPointCentroid(obj);
 		Coordinates coor[] = fc.getPentagonCoordinate();
 		canvas.addNewElement(p, obj.getPredictedFault());
-		canvas.drawpentagon(coor, !obj.isAmbiguous());
+		if(!obj.isAmbiguous())
+			canvas.drawpentagon(coor, Color.BLUE);
+		else
+			canvas.drawpentagon(coor, Color.RED);
+	}
+	
+	public void displayPolygon(ArrayList<Point> list, Color arg) {
+		canvas.drawpolygon(list, arg);
 	}
 
 	public int countFaultPoints() {

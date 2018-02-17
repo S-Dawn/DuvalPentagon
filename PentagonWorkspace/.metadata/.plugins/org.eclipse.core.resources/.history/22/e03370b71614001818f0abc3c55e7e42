@@ -1,0 +1,89 @@
+package com.duval.custom;
+
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.duval.datasource.DSData;
+import com.duval.datasource.DSDataPatch;
+import com.duval.datasource.GenData;
+import com.duval.utils.Coordinates;
+
+public class Boundary {
+	
+	private List<ClusterUnit> dataset;
+	int m = 800,n =600;
+
+	private ArrayList<Point> PDList = new ArrayList<>();
+	private ArrayList<Point> D1List = new ArrayList<>();
+	private ArrayList<Point> D2List = new ArrayList<>();
+	private ArrayList<Point> SList = new ArrayList<>();
+	private ArrayList<Point> T1List = new ArrayList<>();
+	private ArrayList<Point> T2List = new ArrayList<>();
+	private ArrayList<Point> T3List = new ArrayList<>();
+
+	public Boundary() {
+		super();
+		dataset = new ArrayList<ClusterUnit>();
+	}
+
+	public void appendList(List<DSData> list) {
+		ClusterUnit unit;
+		for (GenData obj : list) {
+			unit = new ClusterUnit(obj.getCoordinates(), obj.getFault());
+			this.dataset.add(unit);
+		}
+	}
+
+	public void appendListPatch(List<DSDataPatch> list) {
+		ClusterUnit unit;
+		for (GenData obj : list) {
+			unit = new ClusterUnit(obj.getCoordinates(), obj.getFault());
+			this.dataset.add(unit);
+		}
+	}
+	
+	public void initiateConvexHull() {
+		int x, y;
+		for(ClusterUnit obj:dataset) {
+			x = (int) obj.getCoord().getX();
+			y = (int) obj.getCoord().getY();
+			if(obj.getOriginalFault().equalsIgnoreCase("PD")) {
+				PDList.add(new Point(x, y));
+			}
+			else if(obj.getOriginalFault().equalsIgnoreCase("D1")) {
+				D1List.add(new Point(x, y));
+			}
+			
+		}
+	}
+
+	public ArrayList<Point> getPDList() {
+		return PDList;
+	}
+
+	public ArrayList<Point> getD1List() {
+		return D1List;
+	}
+
+	public ArrayList<Point> getD2List() {
+		return D2List;
+	}
+
+	public ArrayList<Point> getSList() {
+		return SList;
+	}
+
+	public ArrayList<Point> getT1List() {
+		return T1List;
+	}
+
+	public ArrayList<Point> getT2List() {
+		return T2List;
+	}
+
+	public ArrayList<Point> getT3List() {
+		return T3List;
+	}
+
+}

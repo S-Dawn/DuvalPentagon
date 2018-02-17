@@ -1,7 +1,9 @@
 package com.duval.userinterface;
 
+import java.awt.Color;
 import java.util.Scanner;
 
+import com.duval.custom.Boundary;
 import com.duval.custom.Cluster;
 import com.duval.utils.Controller;
 import com.duval.utils.Coordinates;
@@ -30,8 +32,8 @@ public class Main {
 			}
 		}
 
-		//Controller p = new Controller("G:\\2nd Lab\\DGA DATASET EXCCEL", patch);
-		Controller p = new Controller("D:\\2nd Lab\\PentagonWorkspace\\DGA DATASET EXCCEL", patch);
+		Controller p = new Controller("G:\\2nd Lab\\DGA DATASET EXCCEL", patch);
+		//Controller p = new Controller("D:\\2nd Lab\\PentagonWorkspace\\DGA DATASET EXCCEL", patch);
 		p.predictFaults();
 
 		int choice = 1;
@@ -100,7 +102,21 @@ public class Main {
 //				}
 				p.plotMap(Map);
 				break;
-
+				
+			case 11:
+				Boundary boundary = new Boundary();
+				boundary.appendList(p.getDataset());
+				if(patch)
+					boundary.appendListPatch(p.getDatasetPatch());
+				boundary.initiateConvexHull();
+				p.displayPolygon(boundary.getPDList(), Color.YELLOW);
+				p.displayPolygon(boundary.getD1List(), Color.BLUE);
+				p.displayPolygon(boundary.getD2List(), Color.RED);
+				p.displayPolygon(boundary.getSList(), Color.GREEN);
+				p.displayPolygon(boundary.getTList(), Color.PINK);
+				p.displayPolygon(boundary.getT3List(), Color.ORANGE);
+				break;
+				
 			default:
 				showMenu();
 				break;
@@ -122,6 +138,6 @@ public class Main {
 		System.out.println("8: Calculate Centroid");
 		System.out.println("9: Plot Coordinate");
 		System.out.println("10: Start Clustering");
-
+		System.out.println("11: Start Boundary Creation");
 	}
 }

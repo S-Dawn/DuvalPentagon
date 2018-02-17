@@ -22,7 +22,6 @@
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
 <fullyQualifiedTypeName name="java.awt.Graphics"/>
-<fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="java.awt.event.ActionEvent"/>
 <fullyQualifiedTypeName name="java.util.Timer"/>
 <fullyQualifiedTypeName name="javax.swing.Timer"/>
@@ -45,7 +44,14 @@
 <fullyQualifiedTypeName name="com.duval.datasource.DSData"/>
 <fullyQualifiedTypeName name="com.duval.datasource.DSDataPatch"/>
 <fullyQualifiedTypeName name="com.duval.custom.Cluster"/>
-<fullyQualifiedTypeName name="com.duval.custom.ClusterUnit"/>
 <fullyQualifiedTypeName name="com.duval.utils.Coordinates"/>
+<fullyQualifiedTypeName name="java.util.Stack"/>
+<fullyQualifiedTypeName name="java.awt.geom.Point2D"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.duval.custom.ClusterUnit"/>
+<fullyQualifiedTypeName name="java.awt.Point"/>
+<fullyQualifiedTypeName name="com.duval.custom.QuickHull"/>
+<fullyQualifiedTypeName name="org.openxmlformats.schemas.presentationml.x2006.main.SldDocument"/>
+<fullyQualifiedTypeName name="com.duval.custom.Boundary"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
 </qualifiedTypeNameHistroy>
